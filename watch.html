@@ -63,11 +63,11 @@ if(params.has('live')){
   } else {
     const playerImg = ls.thumbUrl ? `<img src="${escapeAttr(ls.thumbUrl)}" alt="" onerror="this.remove()">` : '';
     html += `<a class="back-btn" href="index.html?view=live">&larr; Live</a>`;
-    html += `<div class="player" style="background:linear-gradient(135deg, ${c.color}2e, #0d1215)">
+    html += `<a class="player" href="${LIVE_LINK}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, ${c.color}2e, #0d1215)">
         ${playerImg}
         <span class="live-badge"><span class="pulse"></span>LIVE</span>
         <span class="center-play"><svg width="22" height="22" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L13 8L4 13.5V2.5Z" fill="#fff"/></svg></span>
-      </div>`;
+      </a>`;
     html += `<div class="viewers" style="margin-bottom:16px;"><span class="pulse"></span>${ls.viewers}</div>`;
     html += `<h1 class="watch-title">${escapeHTML(ls.title)}</h1>`;
     html += tagRow(ls.tags);
@@ -107,10 +107,10 @@ if(params.has('live')){
   } else {
     const playerImg = v.thumbUrl ? `<img src="${escapeAttr(v.thumbUrl)}" alt="" onerror="this.remove()">` : '';
     html += `<a class="back-btn" href="channel.html?channel=${encodeURIComponent(c.id)}">&larr; ${escapeHTML(c.name)}</a>`;
-    html += `<div class="player" style="background:linear-gradient(135deg, ${c.color}2e, #0d1215)">
+    html += `<a class="player" href="${WATCH_LINK}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, ${c.color}2e, #0d1215)">
         ${playerImg}
         <span class="center-play"><svg width="22" height="22" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L13 8L4 13.5V2.5Z" fill="#fff"/></svg></span>
-      </div>`;
+      </a>`;
     html += `<div class="progress-row">
         <span class="time-label">00:00</span>
         <div class="progress-track"><div class="progress-fill" style="width:0%"></div></div>
