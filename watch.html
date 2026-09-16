@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watch | Streamly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <a class="brand" href="index.html?view=feed">
+      <span class="brand-mark">H</span>
+      <span class="brand-name">hicham</span>
+    </a>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<nav class="tabbar" id="tabbar"></nav>
+
+<script src="data.js"></script>
+<script>
+/* ================================================================
+   This page renders TWO possible things depending on the URL:
+     watch.html?channel=ID&video=INDEX   -> a normal video
+     watch.html?live=INDEX               -> a live stream
+   Both real, loadable, bookmarkable, shareable links.
+   ================================================================ */
+const params = new URLSearchParams(location.search);
+document.getElementById('tabbar').innerHTML = tabbarHTML();
+
+function upNextItem(cid, i, v, color){
+  return `<a class="up-next-item" href="watch.html?channel=${encodeURIComponent(cid)}&video=${i}">
+    ${thumbHTML(v, color, i+9, `<span class="duration">${v.dur}</span>`)}
+    <div class="info">
+      <div class="video-title">${escapeHTML(v.title)}</div>
+      <div class="video-sub">${v.views} &middot; ${v.when}</div>
+    </div>
+  </a>`;
+}
+
+function tagRow(tags){
+  return `<div class="tag-row">` + (tags||[]).map(t=>
+    `<a class="tag-chip" href="index.html?view=tag&tag=${encodeURIComponent(t)}">#${escapeHTML(t)}</a>`
+  ).join('') + `</div>`;
+}
+
+let html = '';
+
+if(params.has('live')){
+  highlightTab('live');
+  const idx = Number(params.get('live'));
+  const ls = LIVE_STREAMS[idx];
+  const c = ls ? findChannel(ls.channelId) : null;
+
+  if(!ls || !c){
+    html = `<a class="back-btn" href="index.html?view=live">&larr; Live</a><p class="empty-msg">Stream not found.</p>`;
+  } else {
+    const playerImg = ls.thumbUrl ? `<img src="${escapeAttr(ls.thumbUrl)}" alt="" onerror="this.remove()">` : '';
+    html += `<a class="back-btn" href="index.html?view=live">&larr; Live</a>`;
+    html += `<div class="player" style="background:linear-gradient(135deg, ${c.color}2e, #0d1215)">
+        ${playerImg}
+        <span class="live-badge"><span class="pulse"></span>LIVE</span>
+        <span class="center-play"><svg width="22" height="22" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L13 8L4 13.5V2.5Z" fill="#fff"/></svg></span>
+      </div>`;
+    html += `<div class="viewers" style="margin-bottom:16px;"><span class="pulse"></span>${ls.viewers}</div>`;
+    html += `<h1 class="watch-title">${escapeHTML(ls.title)}</h1>`;
+    html += tagRow(ls.tags);
+    html += `<div class="watch-meta-row">
+        <a href="channel.html?channel=${encodeURIComponent(c.id)}">${avatarHTML(c)}</a>
+        <div class="watch-chan-info">
+          <a class="channel-name" href="channel.html?channel=${encodeURIComponent(c.id)}">${escapeHTML(c.name)}</a>
+          <div class="channel-meta">${c.subs}</div>
+        </div>
+        <a class="site-btn" href="${LIVE_LINK}" target="_blank" rel="noopener">${SITE_ICON} Visit website</a>
+      </div>`;
+    html += `<div class="watch-desc">${escapeHTML(ls.desc||'')}</div>`;
+    html += categoryChipsHTML(ls.categories);
+
+    const others = LIVE_STREAMS.map((l,i)=>({l,i})).filter(o=>o.i!==idx);
+    if(others.length){
+      html += `<h3 class="up-next">Other Live Streams</h3>`;
+      html += `<div class="up-next-list">` + others.map(o=>{
+        const oc = findChannel(o.l.channelId);
+        return `<a class="up-next-item" href="watch.html?live=${o.i}">
+          ${thumbHTML(o.l, oc.color, o.i+5, `<span class="live-badge"><span class="pulse"></span>LIVE</span>`)}
+          <div class="info">
+            <div class="video-title">${escapeHTML(o.l.title)}</div>
+            <div class="video-sub">${escapeHTML(oc.name)} &middot; ${o.l.viewers}</div>
+          </div>
+        </a>`;
+      }).join('') + `</div>`;
+    }
+  }
+} else {
+  const c = findChannel(params.get('channel'));
+  const idx = Number(params.get('video'));
+  const v = c ? c.videos[idx] : null;
+
+  if(!c || !v){
+    html = `<a class="back-btn" href="index.html?view=feed">&larr; Home</a><p class="empty-msg">Video not found.</p>`;
+  } else {
+    const playerImg = v.thumbUrl ? `<img src="${escapeAttr(v.thumbUrl)}" alt="" onerror="this.remove()">` : '';
+    html += `<a class="back-btn" href="channel.html?channel=${encodeURIComponent(c.id)}">&larr; ${escapeHTML(c.name)}</a>`;
+    html += `<div class="player" style="background:linear-gradient(135deg, ${c.color}2e, #0d1215)">
+        ${playerImg}
+        <span class="center-play"><svg width="22" height="22" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L13 8L4 13.5V2.5Z" fill="#fff"/></svg></span>
+      </div>`;
+    html += `<div class="progress-row">
+        <span class="time-label">00:00</span>
+        <div class="progress-track"><div class="progress-fill" style="width:0%"></div></div>
+        <span class="time-label">${v.dur}</span>
+      </div>`;
+    html += `<h1 class="watch-title">${escapeHTML(v.title)}</h1>`;
+    html += tagRow(v.tags);
+    html += `<div class="watch-meta-row">
+        <a href="channel.html?channel=${encodeURIComponent(c.id)}">${avatarHTML(c)}</a>
+        <div class="watch-chan-info">
+          <a class="channel-name" href="channel.html?channel=${encodeURIComponent(c.id)}">${escapeHTML(c.name)}</a>
+          <div class="channel-meta">${c.subs}</div>
+        </div>
+        <span class="watch-stats">${v.views}</span>
+        <a class="site-btn" href="${WATCH_LINK}" target="_blank" rel="noopener">${SITE_ICON} Visit website</a>
+      </div>`;
+    html += `<div class="watch-desc">${escapeHTML(v.desc)}<br><br><span style="color:var(--muted)">${v.when} &middot; ${v.views}</span></div>`;
+    html += categoryChipsHTML(v.categories);
+
+    const others = c.videos.map((vv,i)=>({vv,i})).filter(o=>o.i!==idx);
+    html += `<h3 class="up-next">More from ${escapeHTML(c.name)}</h3>`;
+    html += `<div class="up-next-list">` + others.map(o=>upNextItem(c.id, o.i, o.vv, c.color)).join('') + `</div>`;
+  }
+}
+
+document.getElementById('app').innerHTML = html;
+</script>
+</body>
+</html>

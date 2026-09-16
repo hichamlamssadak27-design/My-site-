@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Streamly | Channel Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <a class="brand" href="index.html?view=feed">
+      <span class="brand-mark">H</span>
+      <span class="brand-name">hicham</span>
+    </a>
+    <button class="search-toggle-btn" id="searchToggle" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+    </button>
+  </div>
+  <div class="search-bar-row" id="searchBarRow">
+    <!-- A real HTML form: submitting it is a normal page load to
+         index.html?view=search&q=... , not JavaScript pretending. -->
+    <form class="search-wrap" method="GET" action="index.html">
+      <input type="hidden" name="view" value="search">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" name="q" id="searchInput" placeholder="Search for a channel or video...">
+    </form>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<nav class="tabbar" id="tabbar"></nav>
+
+<script src="data.js"></script>
+<script>
+/* ================================================================
+   index.html only ever needs to know one thing from the URL: which
+   "view" to show. Everything else (?cat=, ?tag=, ?q=) is read by
+   the matching render function below.
+   ================================================================ */
+const params = new URLSearchParams(location.search);
+const view = params.get('view') || 'feed';
+
+document.getElementById('tabbar').innerHTML = tabbarHTML();
+highlightTab(view==='category' ? 'categories' : (view==='tag' || view==='search' ? null : view));
+
+// Keep the search box open + filled if we're on the search view.
+if(view==='search'){
+  document.getElementById('searchBarRow').classList.add('open');
+  document.getElementById('searchInput').value = params.get('q') || '';
+}
+document.getElementById('searchToggle').addEventListener('click', function(){
+  const row = document.getElementById('searchBarRow');
+  const opened = row.classList.toggle('open');
+  if(opened) document.getElementById('searchInput').focus();
+});
+
+function videoCard(c, v, i){
+  return `<a class="video-card" href="watch.html?channel=${encodeURIComponent(c.id)}&video=${i}">
+    ${thumbHTML(v, c.color, i+1, `<span class="duration">${v.dur}</span>`)}
+    <div class="video-title">${escapeHTML(v.title)}</div>
+    <div class="video-sub">${escapeHTML(c.name)} &middot; ${v.views} &middot; ${v.when}</div>
+  </a>`;
+}
+
+function feedItem(c, v, i){
+  return `<div class="video-card feed-item">
+    <a href="watch.html?channel=${encodeURIComponent(c.id)}&video=${i}">
+      ${thumbHTML(v, c.color, i+1, `<span class="duration">${v.dur}</span>`)}
+      <div class="video-title">${escapeHTML(v.title)}</div>
+    </a>
+    <div class="feed-item-meta">
+      <a href="channel.html?channel=${encodeURIComponent(c.id)}">${avatarHTML(c)}</a>
+      <a class="video-sub" href="watch.html?channel=${encodeURIComponent(c.id)}&video=${i}">${escapeHTML(c.name)} &middot; ${v.views} &middot; ${v.when}</a>
+    </div>
+  </div>`;
+}
+
+function renderFeed(){
+  const order = allVideosFlat().sort((a,b)=> whenToDays(a.v.when) - whenToDays(b.v.when));
+  let html = `<div class="section-heading"><h2>Latest Videos</h2><span>From all channels</span></div>`;
+  html += `<div class="feed-list">` + order.map(o=>feedItem(o.c,o.v,o.i)).join('') + `</div>`;
+  return html;
+}
+
+function renderTrending(){
+  const all = allVideosFlat().sort((a,b)=>(Number(b.v.viewsNum)||0) - (Number(a.v.viewsNum)||0));
+  let html = `<div class="section-heading"><h2>Trending</h2><span>Ranked by view count</span></div>`;
+  html += `<div class="feed-list">` + all.map(o=>feedItem(o.c,o.v,o.i)).join('') + `</div>`;
+  return html;
+}
+
+function renderLive(){
+  let html = `<div class="section-heading"><h2>Live</h2><span>${LIVE_STREAMS.length} streams active now</span></div>`;
+  if(LIVE_STREAMS.length===0){
+    html += `<div class="no-live">No live streams right now.</div>`;
+  } else {
+    html += LIVE_STREAMS.map((ls, i)=>{
+      const c = findChannel(ls.channelId);
+      return `<a class="live-hero" href="watch.html?live=${i}">
+        ${thumbHTML(ls, c.color, 3, `<span class="live-badge"><span class="pulse"></span>LIVE</span>`)}
+        <div>
+          <div class="live-title">${escapeHTML(ls.title)}</div>
+          <div class="channel-meta" style="margin-bottom:6px;">${escapeHTML(c.name)}</div>
+          <div class="viewers"><span class="pulse"></span>${ls.viewers}</div>
+        </div>
+      </a>`;
+    }).join('');
+  }
+  return html;
+}
+
+function renderCategories(){
+  let html = `<div class="section-heading"><h2>Categories</h2><span>${CATEGORIES.length} categories</span></div>`;
+  html += `<div class="category-grid">` + CATEGORIES.map(cat=>{
+    const count = CHANNELS.filter(c=>c.category===cat.id).reduce((s,c)=>s+c.videos.length,0);
+    return `<a class="category-card" href="index.html?view=category&cat=${encodeURIComponent(cat.id)}">
+      <div class="cat-icon" style="background:${cat.color}">${CAT_ICON}</div>
+      <div class="cat-name">${escapeHTML(cat.name)}</div>
+      <div class="cat-count">${count} videos</div>
+    </a>`;
+  }).join('') + `</div>`;
+  return html;
+}
+
+function renderCategoryDetail(){
+  const cat = CATEGORIES.find(c=>c.id===params.get('cat'));
+  if(!cat) return `<p class="empty-msg">Category not found.</p>`;
+  const vids = [];
+  CHANNELS.filter(c=>c.category===cat.id).forEach(c=>c.videos.forEach((v,i)=>vids.push({c,v,i})));
+  let html = `<a class="back-btn" href="index.html?view=categories">&larr; Categories</a>`;
+  html += `<div class="section-heading"><h2>${escapeHTML(cat.name)}</h2><span>${vids.length} videos</span></div>`;
+  html += `<div class="video-grid">` + vids.map(o=>videoCard(o.c,o.v,o.i)).join('') + `</div>`;
+  return html;
+}
+
+function renderChannels(){
+  let html = `<div class="section-heading"><h2>Channels</h2><span>${CHANNELS.length} active channels</span></div>`;
+  html += `<div class="channel-grid-2col">` + CHANNELS.map(c=>`
+    <a class="channel-card-center" href="channel.html?channel=${encodeURIComponent(c.id)}">
+      <div class="chan-ident">${c.ident}</div>
+      ${avatarHTML(c)}
+      <div class="channel-name">${escapeHTML(c.name)}</div>
+      <div class="channel-meta">${c.videos.length} videos<br>${formatCount(channelTotalViews(c),'views')} total</div>
+    </a>
+  `).join('') + `</div>`;
+  return html;
+}
+
+function renderTagDetail(){
+  const tag = params.get('tag') || '';
+  const vids = allVideosFlat().filter(o=>o.v.tags && o.v.tags.includes(tag));
+  let html = `<a class="back-btn" href="index.html?view=feed">&larr; Home</a>`;
+  html += `<div class="section-heading"><h2>#${escapeHTML(tag)}</h2><span>${vids.length} videos</span></div>`;
+  html += vids.length===0
+    ? `<p class="empty-msg">No videos with this hashtag.</p>`
+    : `<div class="video-grid">` + vids.map(o=>videoCard(o.c,o.v,o.i)).join('') + `</div>`;
+  return html;
+}
+
+function renderSearch(){
+  const q = (params.get('q') || '').toLowerCase().trim();
+  const catMatch = CATEGORIES.filter(cat=>cat.name.toLowerCase().includes(q)).map(cat=>cat.id);
+  const vids = q ? allVideosFlat().filter(o=>
+    o.v.title.toLowerCase().includes(q) ||
+    (o.v.tags||[]).some(t=>t.toLowerCase().includes(q)) ||
+    catMatch.includes(o.c.category) ||
+    o.c.name.toLowerCase().includes(q)
+  ) : [];
+  let html = `<div class="section-heading"><h2>Search results for "${escapeHTML(q)}"</h2><span>${vids.length} videos</span></div>`;
+  html += vids.length===0
+    ? `<p class="empty-msg">No matching results.</p>`
+    : `<div class="video-grid">` + vids.map(o=>videoCard(o.c,o.v,o.i)).join('') + `</div>`;
+  return html;
+}
+
+let html;
+if(view==='trending') html = renderTrending();
+else if(view==='live') html = renderLive();
+else if(view==='categories') html = renderCategories();
+else if(view==='category') html = renderCategoryDetail();
+else if(view==='channels') html = renderChannels();
+else if(view==='tag') html = renderTagDetail();
+else if(view==='search') html = renderSearch();
+else html = renderFeed();
+
+document.getElementById('app').innerHTML = html;
+</script>
+</body>
+</html>

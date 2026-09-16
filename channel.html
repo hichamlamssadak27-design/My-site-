@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Channel | Streamly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <a class="brand" href="index.html?view=feed">
+      <span class="brand-mark">H</span>
+      <span class="brand-name">hicham</span>
+    </a>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<nav class="tabbar" id="tabbar"></nav>
+
+<script src="data.js"></script>
+<script>
+// This page's only job: read ?channel=ID from the address bar,
+// find that channel in data.js, and render its page.
+const params = new URLSearchParams(location.search);
+const c = findChannel(params.get('channel'));
+
+document.getElementById('tabbar').innerHTML = tabbarHTML();
+highlightTab('channels');
+
+function videoCard(c, v, i){
+  return `<a class="video-card" href="watch.html?channel=${encodeURIComponent(c.id)}&video=${i}">
+    ${thumbHTML(v, c.color, i+1, `<span class="duration">${v.dur}</span>`)}
+    <div class="video-title">${escapeHTML(v.title)}</div>
+    <div class="video-sub">${escapeHTML(c.name)} &middot; ${v.views} &middot; ${v.when}</div>
+  </a>`;
+}
+
+let html;
+if(!c){
+  html = `<a class="back-btn" href="index.html?view=channels">&larr; Back</a><p class="empty-msg">Channel not found.</p>`;
+} else {
+  html = `<a class="back-btn" href="index.html?view=channels">&larr; Back</a>`;
+  html += `<div class="channel-banner" style="background:linear-gradient(135deg, ${c.color}22, var(--surface))">
+      ${avatarHTML(c)}
+      <div>
+        <h1>${escapeHTML(c.name)}</h1>
+        <div class="channel-meta">${escapeHTML(c.handle)} &middot; ${c.subs}</div>
+        <p>${escapeHTML(c.desc)}</p>
+      </div>
+      <a class="site-btn" href="${WATCH_LINK}" target="_blank" rel="noopener">${SITE_ICON} Visit website</a>
+    </div>`;
+  html += `<div class="section-heading"><h2>Videos</h2><span>${c.videos.length} videos</span></div>`;
+  html += `<div class="video-grid">` + c.videos.map((v,i)=>videoCard(c,v,i)).join('') + `</div>`;
+}
+
+document.getElementById('app').innerHTML = html;
+</script>
+</body>
+</html>
