@@ -147,7 +147,7 @@ const CAT_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="#12181c" stroke-w
 
 // External destinations for the "Visit website" buttons (edit freely).
 const WATCH_LINK = 'https://www.google.com';
-const LIVE_LINK = 'https://www.google1.com';
+const LIVE_LINK = 'https://www.google.com';
 
 // Marks the matching bottom-tab as active. Call once per page with
 // the tab name that page belongs to ('feed','trending','live','categories','channels', or null).
