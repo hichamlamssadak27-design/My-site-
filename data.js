@@ -65,6 +65,14 @@ const CHANNELS = [
       {title:'How Referees Read Offside in Fractions of a Second', dur:'07:39', views:'298K views', viewsNum:298000, when:'6 days ago', desc:'A technical explanation of the decision-making process in tough offside calls.', tags:['officiating','var technology','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://picsum.photos/seed/offside/400/225'},
     ]
   },
+   {
+    id:'hicham', ident:'05', name:'The hicham', handle:'@hicham', color:PALETTE[4], category:'sports', avatarUrl:'https://imglink.cc/cdn/419uHuNt5s.jpg',
+    subs:'1.2M subscribers', desc:'Breaking down the decisive moments in sports, second by second.',
+    videos:[
+      {title:'Play That Changed the Final: Full Breakdown', dur:'10:12', views:'640K views', viewsNum:640000, when:'1 day ago', desc:'A tactical breakdown of the decisive moment in the match, in slow motion replay.', tags:['football','championship final','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://imglink.cc/cdn/v41bn_pLSX.jpg'},
+      {title:'Referees Read Offside in Fractions of a Second', dur:'07:39', views:'298K views', viewsNum:298000, when:'6 days ago', desc:'A technical explanation of the decision-making process in tough offside calls.', tags:['officiating','var technology','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://imglink.cc/cdn/8cdWQWyH4n.jpg'},
+    ]
+  },
 ];
 
 const LIVE_STREAMS = [
