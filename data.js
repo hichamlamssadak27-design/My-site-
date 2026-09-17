@@ -21,28 +21,10 @@ const escapeAttr = escapeHTML;
 const PALETTE = ['#e8a33d','#7fa8a0','#d1524a','#9c8ad1','#5fa987'];
 
 const CATEGORIES = [
-{id:'OnlyFans', name:'OnlyFans', color:'#42CAFD'},
-{id:'Anal', name:'Anal', color:'#19535F'},
-{id:'BBC', name:'BBC', color:'#0B7A75'},
-{id:'Asian', name:'Asian', color:'#D7C9AA'},
-{id:'Petite', name:'Petite', color:'#7B2D26'},
-{id:'BDSM', name:'BDSM', color:'#F0F3F5'},
-{id:'Big Boobs', name:'Big Boobs', color:'#64A6BD'},
-{id:'Blowjob', name:'Blowjob', color:'#ADA7C9'},
-{id:'Cosplay', name:'Cosplay', color:'#F4CAE0'},
-{id:'Deep Throat', name:'Deep Throat', color:'#304C89'},
-{id:'Feet', name:'Feet', color:'#CDC392'},
-{id:'Gang Bang', name:'Gang Bang', color:'#9EB7E5'},
-{id:'Latina', name:'Latina', color:'#4A7C59'},
-{id:'Lesbian', name:'Lesbian', color:'#C83E4D'},
-{id:'Masturbation', name:'Masturbation', color:'#F397D6'},
-{id:'MILF', name:'MILF', color:'#8C2155'},
-{id:'Striptease', name:'Striptease', color:'#F4B9B2'},
-{id:'Teen', name:'Teen', color:'#DAEDBD'},
-{id:'Fetish', name:'Fetish', color:'#FDE74C'},
-{id:'Threesome', name:'Threesome', color:'#211A1E'},
-{id:'Wife', name:'Wife', color:'#9067C6'},
-{id:'Big Ass', name:'Big Ass', color:'#F0D2D1'},
+  {id:'cooking', name:'Cooking', color:'#e8a33d', imageUrl:'https://picsum.photos/seed/catcooking/300/300'},
+  {id:'travel', name:'Travel', color:'#7fa8a0', imageUrl:'https://picsum.photos/seed/cattravel/300/300'},
+  {id:'tech', name:'Tech', color:'#d1524a', imageUrl:'https://picsum.photos/seed/cattech/300/300'},
+  {id:'sports', name:'Sports', color:'#9c8ad1', imageUrl:'https://picsum.photos/seed/catsports/300/300'},
 ];
 
 const CHANNELS = [
@@ -82,13 +64,6 @@ const CHANNELS = [
       {title:'The Play That Changed the Final: Full Breakdown', dur:'10:12', views:'640K views', viewsNum:640000, uploaded:'2026-09-16', desc:'A tactical breakdown of the decisive moment in the match, in slow motion replay.', tags:['football','championship final','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://picsum.photos/seed/theplay/400/225'},
       {title:'How Referees Read Offside in Fractions of a Second', dur:'07:39', views:'298K views', viewsNum:298000, uploaded:'2026-09-11', desc:'A technical explanation of the decision-making process in tough offside calls.', tags:['officiating','var technology','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://picsum.photos/seed/offside/400/225'},
     ]
-  },
-   {
-    id:'layladr', ident:'05', name:'layla dream', handle:'@layladr', color:PALETTE[4], category:'Porn', avatarUrl:'https://i.postimg.cc/W1GNLZgP/Picsart-26-09-17-10-33-22-453.jpg',
-    subs:'4K subscribers', desc:'Also known as Powerpufgalz, Layla Dream is a British pornstar based in London.',
-    videos:[
-      {title:'[ layladr ] Busty LaylaDream Rides Cock In Her Ripped Jeans', dur:'12:04', views:'20K views', viewsNum:20000, uploaded:'2026-09-17', desc:"Busty LaylaDream Rides Cock In Her Ripped Jeans", tags:['POV','Blowjob','Cowgirl','Reverse Cowgirl','Big Tits','Natural Big Tits','Tattoos','Handjob','Titty Cumshot','Cumshot','British ','POV'], categories:['cooking'], thumbUrl:'https://i.postimg.cc/zfw161mV/1-(1).jpg'},
-     ]
   },
 ];
 
@@ -166,6 +141,19 @@ function categoryChipsHTML(categoryIds){
     <div class="tag-row" style="margin-bottom:28px;">` +
     cats.map(cat=>`<a class="tag-chip" style="border-color:${cat.color}66; color:${cat.color};" href="index.html?view=category&cat=${encodeURIComponent(cat.id)}">${escapeHTML(cat.name)}</a>`).join('') +
     `</div>`;
+}
+
+// Category image: square, rounded corners, shows imageUrl if set.
+// The colored icon sits behind it as a fallback - if the image link
+// is broken, onerror removes it and the icon underneath shows instead.
+function categoryImageHTML(cat){
+  const img = cat.imageUrl
+    ? `<img src="${escapeAttr(cat.imageUrl)}" alt="" onerror="this.remove()">`
+    : '';
+  return `<div class="cat-image" style="background:${cat.color}">
+    <span class="cat-image-icon">${CAT_ICON}</span>
+    ${img}
+  </div>`;
 }
 
 const SITE_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>`;
