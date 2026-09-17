@@ -21,11 +21,26 @@ const escapeAttr = escapeHTML;
 const PALETTE = ['#e8a33d','#7fa8a0','#d1524a','#9c8ad1','#5fa987'];
 
 const CATEGORIES = [
-  {id:'cooking', name:'Cooking', color:'#e8a33d'},
-  {id:'travel', name:'Travel', color:'#7fa8a0'},
-  {id:'tech', name:'Tech', color:'#d1524a'},
-  {id:'sports', name:'Sports', color:'#9c8ad1'},
-  {id:'porn', name:'Porn', color:'#876bb0'},
+  {id:'Anal', name:'Anal', color:'#19535F'},
+{id:'BBC', name:'BBC', color:'#0B7A75'},
+{id:'Asian', name:'Asian', color:'#D7C9AA'},
+{id:'sports', name:'Sports', color:'#7B2D26'},
+{id:'BDSM', name:'BDSM', color:'#F0F3F5'},
+{id:'Big Boobs', name:'Big Boobs', color:'#64A6BD'},
+{id:'Blowjob', name:'Blowjob', color:'#ADA7C9'},
+{id:'Cosplay', name:'Cosplay', color:'#F4CAE0'},
+{id:'Deep Throat', name:'Deep Throat', color:'#304C89'},
+{id:'Feet', name:'Feet', color:'#CDC392'},
+{id:'Gang Bang', name:'Gang Bang', color:'#9EB7E5'},
+{id:'Latina', name:'Latina', color:'#4A7C59'},
+{id:'Lesbian', name:'Lesbian', color:'#C83E4D'},
+{id:'Masturbation', name:'Masturbation', color:'#F397D6'},
+{id:'MILF', name:'MILF', color:'335C67'},
+{id:'Striptease', name:'Striptease', color:'#F4B9B2'},
+{id:'Teen', name:'Teen', color:'#DAEDBD'},
+{id:'sports', name:'Sports', color:'#FDE74C'},
+{id:'Threesome', name:'Threesome', color:'#211A1E'},
+{id:'Hotwife', name:'Hotwife', color:'#9067C6'}
 ];
 
 const CHANNELS = [
