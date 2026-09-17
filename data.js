@@ -21,7 +21,7 @@ const escapeAttr = escapeHTML;
 const PALETTE = ['#e8a33d','#7fa8a0','#d1524a','#9c8ad1','#5fa987'];
 
 const CATEGORIES = [
-  {id:'Anal', name:'Anal', color:'#19535F'},
+{id:'Anal', name:'Anal', color:'#19535F'},
 {id:'BBC', name:'BBC', color:'#0B7A75'},
 {id:'Asian', name:'Asian', color:'#D7C9AA'},
 {id:'Petite', name:'Petite', color:'#7B2D26'},
@@ -40,7 +40,7 @@ const CATEGORIES = [
 {id:'Teen', name:'Teen', color:'#DAEDBD'},
 {id:'Fetish', name:'Fetish', color:'#FDE74C'},
 {id:'Threesome', name:'Threesome', color:'#211A1E'},
-{id:'Hotwife', name:'Hotwife', color:'#9067C6'}
+{id:'Wife', name:'Wife', color:'#9067C6'}
 ];
 
 const CHANNELS = [
