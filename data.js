@@ -35,10 +35,10 @@ const CATEGORIES = [
 {id:'Latina', name:'Latina', color:'#4A7C59'},
 {id:'Lesbian', name:'Lesbian', color:'#C83E4D'},
 {id:'Masturbation', name:'Masturbation', color:'#F397D6'},
-{id:'MILF', name:'MILF', color:'335C67'},
+{id:'MILF', name:'MILF', color:'#8C2155'},
 {id:'Striptease', name:'Striptease', color:'#F4B9B2'},
 {id:'Teen', name:'Teen', color:'#DAEDBD'},
-{id:'sports', name:'Sports', color:'#FDE74C'},
+{id:'Fetish', name:'Fetish', color:'#FDE74C'},
 {id:'Threesome', name:'Threesome', color:'#211A1E'},
 {id:'Hotwife', name:'Hotwife', color:'#9067C6'}
 ];
