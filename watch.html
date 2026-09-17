@@ -39,7 +39,7 @@ function upNextItem(cid, i, v, color){
     ${thumbHTML(v, color, i+9, `<span class="duration">${v.dur}</span>`)}
     <div class="info">
       <div class="video-title">${escapeHTML(v.title)}</div>
-      <div class="video-sub">${v.views} &middot; ${v.when}</div>
+      <div class="video-sub">${v.views} &middot; ${timeAgo(v.uploaded)}</div>
     </div>
   </a>`;
 }
@@ -127,7 +127,7 @@ if(params.has('live')){
         <span class="watch-stats">${v.views}</span>
         <a class="site-btn" href="${WATCH_LINK}" target="_blank" rel="noopener">${SITE_ICON} Visit website</a>
       </div>`;
-    html += `<div class="watch-desc">${escapeHTML(v.desc)}<br><br><span style="color:var(--muted)">${v.when} &middot; ${v.views}</span></div>`;
+    html += `<div class="watch-desc">${escapeHTML(v.desc)}<br><br><span style="color:var(--muted)">${timeAgo(v.uploaded)} &middot; ${v.views}</span></div>`;
     html += categoryChipsHTML(v.categories);
 
     const others = c.videos.map((vv,i)=>({vv,i})).filter(o=>o.i!==idx);
