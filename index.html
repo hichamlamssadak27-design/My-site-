@@ -119,7 +119,7 @@ function renderCategories(){
   html += `<div class="category-grid">` + CATEGORIES.map(cat=>{
     const count = CHANNELS.filter(c=>c.category===cat.id).reduce((s,c)=>s+c.videos.length,0);
     return `<a class="category-card" href="index.html?view=category&cat=${encodeURIComponent(cat.id)}">
-      <div class="cat-icon" style="background:${cat.color}">${CAT_ICON}</div>
+      ${categoryImageHTML(cat)}
       <div class="cat-name">${escapeHTML(cat.name)}</div>
       <div class="cat-count">${count} videos</div>
     </a>`;
