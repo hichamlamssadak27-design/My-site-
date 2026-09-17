@@ -21,10 +21,28 @@ const escapeAttr = escapeHTML;
 const PALETTE = ['#e8a33d','#7fa8a0','#d1524a','#9c8ad1','#5fa987'];
 
 const CATEGORIES = [
-  {id:'cooking', name:'Cooking', color:'#e8a33d', imageUrl:'https://picsum.photos/seed/catcooking/300/300'},
-  {id:'travel', name:'Travel', color:'#7fa8a0', imageUrl:'https://picsum.photos/seed/cattravel/300/300'},
-  {id:'tech', name:'Tech', color:'#d1524a', imageUrl:'https://picsum.photos/seed/cattech/300/300'},
-  {id:'sports', name:'Sports', color:'#9c8ad1', imageUrl:'https://picsum.photos/seed/catsports/300/300'},
+{id:'Anal', name:'Anal', color:'#19535F', imageUrl:'https://imglink.cc/cdn/UdL2W6BdL4.jpg'},
+{id:'BBC', name:'BBC', color:'#0B7A75', imageUrl:'https://imglink.cc/cdn/N3XSx7IIeq.png'},
+{id:'Asian', name:'Asian', color:'#D7C9AA', imageUrl:'https://imglink.cc/cdn/ro5VFNWJEG.jpg'},
+{id:'Petite', name:'Petite', color:'#7B2D26', imageUrl:'https://imglink.cc/cdn/ajdkW2zdgH.jpg'},
+{id:'BDSM', name:'BDSM', color:'#F0F3F5', imageUrl:'https://imglink.cc/cdn/8wbdqkbLZc.png'},
+{id:'Big Boobs', name:'Big Boobs', color:'#64A6BD', imageUrl:'https://imglink.cc/cdn/KBR2Mpd8b9.jpg'},
+{id:'Blowjob', name:'Blowjob', color:'#ADA7C9', imageUrl:'https://imglink.cc/cdn/s6_I7Da4DP.jpg'},
+{id:'Cosplay', name:'Cosplay', color:'#F4CAE0', imageUrl:'https://imglink.cc/cdn/sWXMN8cuP5.jpg'},
+{id:'Deep Throat', name:'Deep Throat', color:'#304C89', imageUrl:'https://imglink.cc/cdn/RFSNwox_Wl.png'},
+{id:'Feet', name:'Feet', color:'#CDC392', imageUrl:'https://imglink.cc/cdn/ubADRYzt53.png'},},
+{id:'Gang Bang', name:'Gang Bang', color:'#9EB7E5', imageUrl:'https://imglink.cc/cdn/touw3_ayaG.png'},
+{id:'Latina', name:'Latina', color:'#4A7C59', imageUrl:'https://imglink.cc/cdn/HLNTzJ_Jti.jpg'},
+{id:'Lesbian', name:'Lesbian', color:'#C83E4D', imageUrl:'https://imglink.cc/cdn/Xg3NP8-hsa.png'},
+{id:'Masturbation', name:'Masturbation', color:'#F397D6', imageUrl:'https://imglink.cc/cdn/_Bo_Mwi6Bd.png'},
+{id:'MILF', name:'MILF', color:'335C67', imageUrl:'https://imglink.cc/cdn/n-7fGDOQLx.jpg'},
+{id:'Striptease', name:'Striptease', color:'#F4B9B2', imageUrl:'https://imglink.cc/cdn/2FVpvlOLfq.jpg'},
+{id:'Teen', name:'Teen', color:'#DAEDBD', imageUrl:'https://imglink.cc/cdn/PtfA8R-BOh.png'},
+{id:'Fetish', name:'Fetish', color:'#FDE74C', imageUrl:'https://imglink.cc/cdn/YnYZa21t9r.png'},
+{id:'Threesome', name:'Threesome', color:'#211A1E', imageUrl:'https://imglink.cc/cdn/ew0x7Do-JN.png'},
+{id:'Wife', name:'Wife', color:'#9067C6', imageUrl:'https://imglink.cc/cdn/jBBL4ShctH.jpg'},
+{id:'Sex', name:'Sex', color:'#42CAFD', imageUrl:'https://picsum.photos/seed/catcooking/300/300'},
+{id:'Big Ass', name:'Big Ass', color:'#F0D2D1', imageUrl:'https://imglink.cc/cdn/fCuhZoN3aq.jpg'},
 ];
 
 const CHANNELS = [
