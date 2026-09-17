@@ -25,6 +25,7 @@ const CATEGORIES = [
   {id:'travel', name:'Travel', color:'#7fa8a0'},
   {id:'tech', name:'Tech', color:'#d1524a'},
   {id:'sports', name:'Sports', color:'#9c8ad1'},
+  {id:'porn', name:'Porn', color:'#876bb0'},
 ];
 
 const CHANNELS = [
@@ -64,6 +65,13 @@ const CHANNELS = [
       {title:'The Play That Changed the Final: Full Breakdown', dur:'10:12', views:'640K views', viewsNum:640000, uploaded:'2026-09-16', desc:'A tactical breakdown of the decisive moment in the match, in slow motion replay.', tags:['football','championship final','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://picsum.photos/seed/theplay/400/225'},
       {title:'How Referees Read Offside in Fractions of a Second', dur:'07:39', views:'298K views', viewsNum:298000, uploaded:'2026-09-11', desc:'A technical explanation of the decision-making process in tough offside calls.', tags:['officiating','var technology','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://picsum.photos/seed/offside/400/225'},
     ]
+  },
+   {
+    id:'layladr', ident:'05', name:'layla dream', handle:'@layladr', color:PALETTE[4], category:'Porn', avatarUrl:'https://i.postimg.cc/W1GNLZgP/Picsart-26-09-17-10-33-22-453.jpg',
+    subs:'4K subscribers', desc:'Also known as Powerpufgalz, Layla Dream is a British pornstar based in London.',
+    videos:[
+      {title:'[ layladr ] Busty LaylaDream Rides Cock In Her Ripped Jeans', dur:'12:04', views:'20K views', viewsNum:20000, uploaded:'2026-09-17', desc:"Busty LaylaDream Rides Cock In Her Ripped Jeans", tags:[POV','Blowjob','Cowgirl','Reverse Cowgirl','Big Tits','Natural Big Tits','Tattoos','Handjob','Titty Cumshot','Cumshot','British ','POV'], categories:['cooking'], thumbUrl:'https://i.postimg.cc/zfw161mV/1-(1).jpg'},
+     ]
   },
 ];
 
