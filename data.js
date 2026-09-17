@@ -70,7 +70,7 @@ const CHANNELS = [
     id:'layladr', ident:'05', name:'layla dream', handle:'@layladr', color:PALETTE[4], category:'Porn', avatarUrl:'https://i.postimg.cc/W1GNLZgP/Picsart-26-09-17-10-33-22-453.jpg',
     subs:'4K subscribers', desc:'Also known as Powerpufgalz, Layla Dream is a British pornstar based in London.',
     videos:[
-      {title:'[ layladr ] Busty LaylaDream Rides Cock In Her Ripped Jeans', dur:'12:04', views:'20K views', viewsNum:20000, uploaded:'2026-09-17', desc:"Busty LaylaDream Rides Cock In Her Ripped Jeans", tags:[POV','Blowjob','Cowgirl','Reverse Cowgirl','Big Tits','Natural Big Tits','Tattoos','Handjob','Titty Cumshot','Cumshot','British ','POV'], categories:['cooking'], thumbUrl:'https://i.postimg.cc/zfw161mV/1-(1).jpg'},
+      {title:'[ layladr ] Busty LaylaDream Rides Cock In Her Ripped Jeans', dur:'12:04', views:'20K views', viewsNum:20000, uploaded:'2026-09-17', desc:"Busty LaylaDream Rides Cock In Her Ripped Jeans", tags:['POV','Blowjob','Cowgirl','Reverse Cowgirl','Big Tits','Natural Big Tits','Tattoos','Handjob','Titty Cumshot','Cumshot','British ','POV'], categories:['cooking'], thumbUrl:'https://i.postimg.cc/zfw161mV/1-(1).jpg'},
      ]
   },
 ];
