@@ -164,16 +164,21 @@ nav.tabbar{
   gap:12px; margin-bottom:30px;
 }
 .category-card{
-  border:1px solid var(--line); border-radius:var(--radius); padding:18px 16px;
-  cursor:pointer; background:var(--surface); display:block;
+  border:1px solid var(--line); border-radius:var(--radius); padding:14px;
+  cursor:pointer; background:var(--surface); display:block; text-align:center;
   transition:border-color .15s ease, transform .15s ease;
 }
 .category-card:hover{ transform:translateY(-2px); }
-.category-card .cat-icon{
-  width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center;
-  margin-bottom:10px;
+.category-card .cat-image{
+  width:100%; aspect-ratio:1/1; border-radius:14px; overflow:hidden;
+  margin-bottom:10px; position:relative;
+  display:flex; align-items:center; justify-content:center;
 }
-.category-card .cat-icon svg{ width:18px; height:18px; }
+.category-card .cat-image-icon{ width:30%; max-width:34px; }
+.category-card .cat-image-icon svg{ width:100%; height:100%; }
+.category-card .cat-image img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+}
 .category-card .cat-name{ font-family:'Fraunces',serif; font-weight:600; font-size:15px; }
 .category-card .cat-count{ color:var(--muted); font-size:12px; margin-top:2px; }
 
