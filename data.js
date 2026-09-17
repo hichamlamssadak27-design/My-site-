@@ -32,45 +32,37 @@ const CHANNELS = [
     id:'kitchen', ident:'01', name:'Free Kitchen', handle:'@freekitchen', color:PALETTE[0], category:'cooking', avatarUrl:'https://i.pravatar.cc/150?img=12',
     subs:'412K subscribers', desc:'Simple recipes from kitchens around the world, no complicated measurements or odd tools.',
     videos:[
-      {title:'How to Make Pizza Dough That Works the First Time', dur:'12:04', views:'88K views', viewsNum:88000, when:'3 days ago', desc:"A step-by-step guide to pizza dough that's soft inside and crisp outside, with the secrets of proper fermentation.", tags:['pizza','dough','home cooking','easy recipes','kitchen basics','meal prep','comfort food','weeknight dinner','cooking tips','food inspiration'], categories:['cooking'], thumbUrl:'https://picsum.photos/seed/pizzadough/400/225'},
-      {title:'Five Quick Meals for Midweek', dur:'08:41', views:'145K views', viewsNum:145000, when:'1 week ago', desc:'Meals that take no more than twenty minutes to prepare, perfect for busy days.', tags:['quick meals','midweek','home cooking','easy recipes','kitchen basics','meal prep','comfort food','weeknight dinner','cooking tips','food inspiration'], categories:['cooking'], thumbUrl:'https://picsum.photos/seed/quickmeals/400/225'},
-      {title:'The French Broth Secret No One Tells You', dur:'15:20', views:'62K views', viewsNum:62000, when:'2 weeks ago', desc:'The technique for building layers of flavor in a traditional French broth, using tools already in your kitchen.', tags:['french broth','french cuisine','home cooking','easy recipes','kitchen basics','meal prep','comfort food','weeknight dinner','cooking tips','food inspiration'], categories:['cooking'], thumbUrl:'https://picsum.photos/seed/frenchbroth/400/225'},
-      {title:'Desserts With Only Three Ingredients', dur:'06:57', views:'201K views', viewsNum:201000, when:'1 month ago', desc:'Quick desserts that need no oven and no prior experience.', tags:['quick desserts','no oven','home cooking','easy recipes','kitchen basics','meal prep','comfort food','weeknight dinner','cooking tips','food inspiration'], categories:['cooking'], thumbUrl:'https://picsum.photos/seed/threeingredients/400/225'},
+      {title:'How to Make Pizza Dough That Works the First Time', dur:'12:04', views:'88K views', viewsNum:88000, uploaded:'2026-09-14', desc:"A step-by-step guide to pizza dough that's soft inside and crisp outside, with the secrets of proper fermentation.", tags:['pizza','dough','home cooking','easy recipes','kitchen basics','meal prep','comfort food','weeknight dinner','cooking tips','food inspiration'], categories:['cooking'], thumbUrl:'https://picsum.photos/seed/pizzadough/400/225'},
+      {title:'Five Quick Meals for Midweek', dur:'08:41', views:'145K views', viewsNum:145000, uploaded:'2026-09-10', desc:'Meals that take no more than twenty minutes to prepare, perfect for busy days.', tags:['quick meals','midweek','home cooking','easy recipes','kitchen basics','meal prep','comfort food','weeknight dinner','cooking tips','food inspiration'], categories:['cooking'], thumbUrl:'https://picsum.photos/seed/quickmeals/400/225'},
+      {title:'The French Broth Secret No One Tells You', dur:'15:20', views:'62K views', viewsNum:62000, uploaded:'2026-09-03', desc:'The technique for building layers of flavor in a traditional French broth, using tools already in your kitchen.', tags:['french broth','french cuisine','home cooking','easy recipes','kitchen basics','meal prep','comfort food','weeknight dinner','cooking tips','food inspiration'], categories:['cooking'], thumbUrl:'https://picsum.photos/seed/frenchbroth/400/225'},
+      {title:'Desserts With Only Three Ingredients', dur:'06:57', views:'201K views', viewsNum:201000, uploaded:'2026-08-18', desc:'Quick desserts that need no oven and no prior experience.', tags:['quick desserts','no oven','home cooking','easy recipes','kitchen basics','meal prep','comfort food','weeknight dinner','cooking tips','food inspiration'], categories:['cooking'], thumbUrl:'https://picsum.photos/seed/threeingredients/400/225'},
     ]
   },
   {
     id:'wanderer', ident:'02', name:'Wanderer', handle:'@wanderer', color:PALETTE[1], category:'travel', avatarUrl:'https://i.pravatar.cc/150?img=32',
     subs:'901K subscribers', desc:'Travel diaries without a script, from the back alleys of cities rather than tourist guidebooks.',
     videos:[
-      {title:'Three Days Lost in the Old City of Fez', dur:'21:15', views:'320K views', viewsNum:320000, when:'2 days ago', desc:'A walking journey inside the walls, with no map and no plan.', tags:['fez','morocco','travel diary','budget travel','solo travel','city guide','local culture','backpacking','travel tips','wanderlust'], categories:['travel'], thumbUrl:'https://imglink.cc/cdn/A6rMBYA56j.jpg'},
-      {title:'What to Eat in Istanbul on Ten Dollars', dur:'14:02', views:'510K views', viewsNum:510000, when:'5 days ago', desc:'A tour of street food vendors in neighborhoods far from the tourist trail.', tags:['istanbul','street food','travel diary','budget travel','solo travel','city guide','local culture','backpacking','travel tips','wanderlust'], categories:['travel'], thumbUrl:'https://picsum.photos/seed/istanbul/400/225'},
-      {title:'The Night Train From Vienna to Venice', dur:'18:33', views:'190K views', viewsNum:190000, when:'3 weeks ago', desc:'Sleeping on a cross-border train and watching the mountains at dawn.', tags:['europe trains','night travel','travel diary','budget travel','solo travel','city guide','local culture','backpacking','travel tips','wanderlust'], categories:['travel'], thumbUrl:'https://picsum.photos/seed/nighttrain/400/225'},
+      {title:'Three Days Lost in the Old City of Fez', dur:'21:15', views:'320K views', viewsNum:320000, uploaded:'2026-09-15', desc:'A walking journey inside the walls, with no map and no plan.', tags:['fez','morocco','travel diary','budget travel','solo travel','city guide','local culture','backpacking','travel tips','wanderlust'], categories:['travel'], thumbUrl:'https://picsum.photos/seed/fez/400/225'},
+      {title:'What to Eat in Istanbul on Ten Dollars', dur:'14:02', views:'510K views', viewsNum:510000, uploaded:'2026-09-12', desc:'A tour of street food vendors in neighborhoods far from the tourist trail.', tags:['istanbul','street food','travel diary','budget travel','solo travel','city guide','local culture','backpacking','travel tips','wanderlust'], categories:['travel'], thumbUrl:'https://picsum.photos/seed/istanbul/400/225'},
+      {title:'The Night Train From Vienna to Venice', dur:'18:33', views:'190K views', viewsNum:190000, uploaded:'2026-08-27', desc:'Sleeping on a cross-border train and watching the mountains at dawn.', tags:['europe trains','night travel','travel diary','budget travel','solo travel','city guide','local culture','backpacking','travel tips','wanderlust'], categories:['travel'], thumbUrl:'https://picsum.photos/seed/nighttrain/400/225'},
     ]
   },
   {
     id:'code', ident:'03', name:'Plain Code', handle:'@plaincode', color:PALETTE[2], category:'tech', avatarUrl:'https://i.pravatar.cc/150?img=5',
     subs:'268K subscribers', desc:'Straight-to-the-point programming explanations with no long intros, for developers who just want the idea.',
     videos:[
-      {title:'Understanding Closures in JavaScript in Ten Minutes', dur:'09:48', views:'77K views', viewsNum:77000, when:'Yesterday', desc:'A direct explanation of closures with short, practical examples.', tags:['javascript','closures','software engineering','programming tips','developer life','clean code','debugging','system design','coding habits','tech explainer'], categories:['tech'], thumbUrl:'https://picsum.photos/seed/closures/400/225'},
-      {title:'Why Most Databases Fail Under Load', dur:'16:29', views:'54K views', viewsNum:54000, when:'4 days ago', desc:'A look at common performance bottlenecks and how to diagnose them early.', tags:['databases','performance','software engineering','programming tips','developer life','clean code','debugging','system design','coding habits','tech explainer'], categories:['tech'], thumbUrl:'https://picsum.photos/seed/databases/400/225'},
-      {title:'Building an API From Scratch in One Sitting', dur:'27:10', views:'133K views', viewsNum:133000, when:'10 days ago', desc:'Designing and building a simple, production-ready API, testing every step.', tags:['api','backend','software engineering','programming tips','developer life','clean code','debugging','system design','coding habits','tech explainer'], categories:['tech'], thumbUrl:'https://picsum.photos/seed/apibuild/400/225'},
-      {title:'Common Mistakes That Quietly Slow Down Your Code', dur:'11:05', views:'96K views', viewsNum:96000, when:'1 month ago', desc:'A practical list of the most frequent mistakes in everyday code and how to fix them.', tags:['coding mistakes','code quality','software engineering','programming tips','developer life','clean code','debugging','system design','coding habits','tech explainer'], categories:['tech'], thumbUrl:'https://picsum.photos/seed/codemistakes/400/225'},
+      {title:'Understanding Closures in JavaScript in Ten Minutes', dur:'09:48', views:'77K views', viewsNum:77000, uploaded:'2026-09-16', desc:'A direct explanation of closures with short, practical examples.', tags:['javascript','closures','software engineering','programming tips','developer life','clean code','debugging','system design','coding habits','tech explainer'], categories:['tech'], thumbUrl:'https://picsum.photos/seed/closures/400/225'},
+      {title:'Why Most Databases Fail Under Load', dur:'16:29', views:'54K views', viewsNum:54000, uploaded:'2026-09-13', desc:'A look at common performance bottlenecks and how to diagnose them early.', tags:['databases','performance','software engineering','programming tips','developer life','clean code','debugging','system design','coding habits','tech explainer'], categories:['tech'], thumbUrl:'https://picsum.photos/seed/databases/400/225'},
+      {title:'Building an API From Scratch in One Sitting', dur:'27:10', views:'133K views', viewsNum:133000, uploaded:'2026-09-07', desc:'Designing and building a simple, production-ready API, testing every step.', tags:['api','backend','software engineering','programming tips','developer life','clean code','debugging','system design','coding habits','tech explainer'], categories:['tech'], thumbUrl:'https://picsum.photos/seed/apibuild/400/225'},
+      {title:'Common Mistakes That Quietly Slow Down Your Code', dur:'11:05', views:'96K views', viewsNum:96000, uploaded:'2026-08-18', desc:'A practical list of the most frequent mistakes in everyday code and how to fix them.', tags:['coding mistakes','code quality','software engineering','programming tips','developer life','clean code','debugging','system design','coding habits','tech explainer'], categories:['tech'], thumbUrl:'https://picsum.photos/seed/codemistakes/400/225'},
     ]
   },
   {
     id:'sports', ident:'04', name:'The Snap', handle:'@thesnap', color:PALETTE[3], category:'sports', avatarUrl:'https://i.pravatar.cc/150?img=59',
     subs:'1.2M subscribers', desc:'Breaking down the decisive moments in sports, second by second.',
     videos:[
-      {title:'The Play That Changed the Final: Full Breakdown', dur:'10:12', views:'640K views', viewsNum:640000, when:'1 day ago', desc:'A tactical breakdown of the decisive moment in the match, in slow motion replay.', tags:['football','championship final','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://picsum.photos/seed/theplay/400/225'},
-      {title:'How Referees Read Offside in Fractions of a Second', dur:'07:39', views:'298K views', viewsNum:298000, when:'6 days ago', desc:'A technical explanation of the decision-making process in tough offside calls.', tags:['officiating','var technology','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://picsum.photos/seed/offside/400/225'},
-    ]
-  },
-   {
-    id:'hicham', ident:'05', name:'The hicham', handle:'@hicham', color:PALETTE[4], category:'sports', avatarUrl:'https://imglink.cc/cdn/419uHuNt5s.jpg',
-    subs:'1.2M subscribers', desc:'Breaking down the decisive moments in sports, second by second.',
-    videos:[
-      {title:'Play That Changed the Final: Full Breakdown', dur:'10:12', views:'640K views', viewsNum:640000, when:'1 day ago', desc:'A tactical breakdown of the decisive moment in the match, in slow motion replay.', tags:['football','championship final','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://imglink.cc/cdn/v41bn_pLSX.jpg'},
-      {title:'Referees Read Offside in Fractions of a Second', dur:'07:39', views:'298K views', viewsNum:298000, when:'6 days ago', desc:'A technical explanation of the decision-making process in tough offside calls.', tags:['officiating','var technology','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://imglink.cc/cdn/8cdWQWyH4n.jpg'},
+      {title:'The Play That Changed the Final: Full Breakdown', dur:'10:12', views:'640K views', viewsNum:640000, uploaded:'2026-09-16', desc:'A tactical breakdown of the decisive moment in the match, in slow motion replay.', tags:['football','championship final','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://picsum.photos/seed/theplay/400/225'},
+      {title:'How Referees Read Offside in Fractions of a Second', dur:'07:39', views:'298K views', viewsNum:298000, uploaded:'2026-09-11', desc:'A technical explanation of the decision-making process in tough offside calls.', tags:['officiating','var technology','sports analysis','game breakdown','tactics','highlight review','athlete mindset','match recap','coaching insight','performance analysis'], categories:['sports'], thumbUrl:'https://picsum.photos/seed/offside/400/225'},
     ]
   },
 ];
@@ -95,17 +87,26 @@ function allVideosFlat(){
   return out;
 }
 function channelTotalViews(c){ return c.videos.reduce((s,v)=>s+v.viewsNum, 0); }
-function whenToDays(w){
-  if(!w) return 9999;
-  const s = w.toLowerCase();
-  if(s==='yesterday') return 1;
-  const m = s.match(/(\d+(?:\.\d+)?)\s*(day|week|month)/);
-  if(!m) return 9999;
-  const num = parseFloat(m[1]);
-  if(m[2]==='day') return num;
-  if(m[2]==='week') return num*7;
-  if(m[2]==='month') return num*30;
-  return 9999;
+
+// Every video/live entry stores a real upload date (uploaded:'YYYY-MM-DD').
+// These two functions turn that date into "3 days ago" style text,
+// computed fresh from the visitor's current clock every time the page
+// loads - so the label keeps updating on its own, forever, with no
+// manual editing needed.
+function daysSince(dateStr){
+  if(!dateStr) return 9999;
+  const then = new Date(dateStr+'T00:00:00');
+  const now = new Date();
+  return Math.floor((now - then) / 86400000);
+}
+function timeAgo(dateStr){
+  const d = daysSince(dateStr);
+  if(d<=0) return 'Today';
+  if(d===1) return 'Yesterday';
+  if(d<7) return d+' days ago';
+  if(d<30){ const w=Math.floor(d/7); return w+(w===1?' week ago':' weeks ago'); }
+  if(d<365){ const m=Math.floor(d/30); return m+(m===1?' month ago':' months ago'); }
+  const y=Math.floor(d/365); return y+(y===1?' year ago':' years ago');
 }
 
 // Channel avatar: shows avatarUrl if set, otherwise a colored initial.
@@ -147,7 +148,7 @@ const CAT_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="#12181c" stroke-w
 
 // External destinations for the "Visit website" buttons (edit freely).
 const WATCH_LINK = 'https://www.google.com';
-const LIVE_LINK = 'https://www.google.com';
+const LIVE_LINK = 'https://www.google1.com';
 
 // Marks the matching bottom-tab as active. Call once per page with
 // the tab name that page belongs to ('feed','trending','live','categories','channels', or null).
