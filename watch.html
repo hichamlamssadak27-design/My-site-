@@ -273,10 +273,11 @@
             item.onkeydown = function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); } };
             item.innerHTML =
                 '<div class="episode-thumb"><span class="ep-num-badge">EP ' + String(epNum).padStart(2,'0') + '</span>' +
-                '<img src="' + ep.thumbnail + '" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;" alt="Episode ' + epNum + ' thumbnail" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x170/1A1A24/FF2D55?text=Animeog\';"></div>' +
+                '<img data-src="' + ep.thumbnail + '" decoding="async" draggable="false" oncontextmenu="return false;" alt="Episode ' + epNum + ' thumbnail" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x170/1A1A24/FF2D55?text=Animeog\';"></div>' +
                 '<div class="episode-info"><div class="ep-title">Episode ' + epNum + '</div><div class="ep-date">' + ep.date + '</div></div>' +
                 '<div class="episode-play-btn"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3.5C6 2.24 7.41 1.5 8.45 2.2L19.5 9.7C20.42 10.33 20.42 11.67 19.5 12.3L8.45 19.8C7.41 20.5 6 19.76 6 18.5V3.5Z" fill="currentColor"/></svg></div>';
             container.appendChild(item);
+            lazyObserve(item.querySelector('img'));
         }
     }
 
