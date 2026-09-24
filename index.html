@@ -148,9 +148,10 @@
             const originalIndex = games.indexOf(game);
             const item = document.createElement('div');
             item.className = 'slider-item';
-            item.innerHTML = '<div class="rank-badge">#' + (index+1) + '</div><img src="' + game.img + '" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x450/1A1A24/FF2D55?text=Animeog\';">';
+            item.innerHTML = '<div class="rank-badge">#' + (index+1) + '</div><img data-src="' + game.img + '" decoding="async" draggable="false" oncontextmenu="return false;" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x450/1A1A24/FF2D55?text=Animeog\';">';
             item.onclick = function(){ window.location.href = 'watch.html?id=' + originalIndex; };
             slider.appendChild(item);
+            lazyObserve(item.querySelector('img'));
         });
     }
 
@@ -161,9 +162,10 @@
             const originalIndex = games.indexOf(game);
             const item = document.createElement('div');
             item.className = 'slider-item';
-            item.innerHTML = '<div class="rank-badge" style="background:linear-gradient(135deg,var(--gold),#C99A2E);color:#1A1A24;">NEW</div><img src="' + game.img + '" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x450/1A1A24/FF2D55?text=Animeog\';">';
+            item.innerHTML = '<div class="rank-badge" style="background:linear-gradient(135deg,var(--gold),#C99A2E);color:#1A1A24;">NEW</div><img data-src="' + game.img + '" decoding="async" draggable="false" oncontextmenu="return false;" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x450/1A1A24/FF2D55?text=Animeog\';">';
             item.onclick = function(){ window.location.href = 'watch.html?id=' + originalIndex; };
             slider.appendChild(item);
+            lazyObserve(item.querySelector('img'));
         });
     }
 
