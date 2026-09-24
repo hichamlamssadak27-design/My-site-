@@ -67,22 +67,28 @@
         renderPagination();
     }
 
-    function goToPage(pageNum) {
-        renderPage(pageNum);
-        document.getElementById('cardContainer').scrollIntoView({behavior:'smooth', block:'start'});
-    }
-
     function renderPagination() {
         const totalPages = Math.ceil(currentList.length / CARDS_PER_PAGE);
         const wrap = document.getElementById('paginationContainer');
         wrap.innerHTML = '';
         if (totalPages <= 1) return;
 
-        const prevBtn = document.createElement('div');
-        prevBtn.className = 'page-btn arrow' + (currentPage === 1 ? ' disabled' : '');
-        prevBtn.textContent = '‹';
-        prevBtn.onclick = function(){ if (currentPage > 1) goToPage(currentPage - 1); };
-        wrap.appendChild(prevBtn);
+        const params = new URLSearchParams(location.search);
+        const type = params.get('type') || 'all';
+        function pageUrl(n) { return 'channel.html?type=' + encodeURIComponent(type) + (n === 1 ? '' : ('&page=' + n)); }
+
+        if (currentPage === 1) {
+            const span = document.createElement('span');
+            span.className = 'page-btn arrow disabled';
+            span.textContent = '‹';
+            wrap.appendChild(span);
+        } else {
+            const a = document.createElement('a');
+            a.className = 'page-btn arrow';
+            a.textContent = '‹';
+            a.href = pageUrl(currentPage - 1);
+            wrap.appendChild(a);
+        }
 
         let windowStart = currentPage - 1;
         let windowEnd = currentPage + 1;
@@ -90,29 +96,44 @@
         if (windowEnd > totalPages) { windowEnd = totalPages; windowStart = Math.max(1, totalPages - 2); }
 
         for (let i = windowStart; i <= windowEnd; i++) {
-            const btn = document.createElement('div');
-            btn.className = 'page-btn' + (i === currentPage ? ' active' : '');
-            btn.textContent = i;
-            btn.onclick = function(){ goToPage(i); };
-            wrap.appendChild(btn);
+            if (i === currentPage) {
+                const span = document.createElement('span');
+                span.className = 'page-btn active';
+                span.textContent = i;
+                wrap.appendChild(span);
+            } else {
+                const a = document.createElement('a');
+                a.className = 'page-btn';
+                a.textContent = i;
+                a.href = pageUrl(i);
+                wrap.appendChild(a);
+            }
         }
 
-        const nextBtn = document.createElement('div');
-        nextBtn.className = 'page-btn arrow' + (currentPage === totalPages ? ' disabled' : '');
-        nextBtn.textContent = '›';
-        nextBtn.onclick = function(){ if (currentPage < totalPages) goToPage(currentPage + 1); };
-        wrap.appendChild(nextBtn);
+        if (currentPage === totalPages) {
+            const span = document.createElement('span');
+            span.className = 'page-btn arrow disabled';
+            span.textContent = '›';
+            wrap.appendChild(span);
+        } else {
+            const a = document.createElement('a');
+            a.className = 'page-btn arrow';
+            a.textContent = '›';
+            a.href = pageUrl(currentPage + 1);
+            wrap.appendChild(a);
+        }
     }
 
     window.addEventListener('DOMContentLoaded', function() {
         const params = new URLSearchParams(location.search);
         const type = params.get('type') || 'all';
+        const page = parseInt(params.get('page')) || 1;
         const label = LABELS[type] || '📂 All Anime';
         document.getElementById('sectionLabel').textContent = label;
         document.getElementById('channelTagline').textContent = label.replace(/^[^\s]+\s/, '');
         document.title = label.replace(/^[^\s]+\s/, '') + ' — Animeog';
         currentList = buildList(type);
-        renderPage(1);
+        renderPage(page);
     });
 </script>
 </body>
