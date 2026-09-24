@@ -3,31 +3,6 @@
    Loaded by index.html, watch.html and channel.html
    ============================================================ */
 
-// ===== Lazy image loading =====
-// Loads an <img>'s real source only once it scrolls near the viewport (works for
-// vertical grids AND horizontal sliders), instead of every image in a page/slider
-// fetching at once. Falls back to loading immediately if the browser has no
-// IntersectionObserver support.
-const _lazyImageObserver = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries, obs) {
-    entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-            const img = entry.target;
-            const src = img.getAttribute('data-src');
-            if (src) { img.src = src; img.removeAttribute('data-src'); }
-            obs.unobserve(img);
-        }
-    });
-}, { rootMargin: '150px' }) : null;
-
-function lazyObserve(img) {
-    if (_lazyImageObserver) {
-        _lazyImageObserver.observe(img);
-    } else {
-        const src = img.getAttribute('data-src');
-        if (src) { img.src = src; img.removeAttribute('data-src'); }
-    }
-}
-
 // Converts "MM:SS" into "H:MM:SS" when minutes exceed 59 (fixes unrealistic durations like "171:46")
 function formatDuration(durStr) {
     if (!durStr || durStr.indexOf(':') === -1) return durStr;
@@ -170,14 +145,14 @@ function createAnimeCard(game, index, targetContainer) {
     const imgWrap = document.createElement('div');
     imgWrap.style.cssText = 'position:relative;width:100%;';
     const img = document.createElement('img');
-    img.setAttribute('data-src', game.img);
+    img.src = game.img;
+    img.loading = 'lazy';
     img.decoding = 'async';
     img.draggable = false;
     img.oncontextmenu = function(){ return false; };
     img.alt = game.epCount + ' episode ' + (game.subDub === 'dub' ? 'dubbed' : 'subbed') + ' anime cover';
     img.onerror = function(){ this.onerror = null; this.src = 'https://via.placeholder.com/300x450/1A1A24/FF2D55?text=Animeog'; };
     imgWrap.appendChild(img);
-    lazyObserve(img);
     const hdBadge = document.createElement('span');
     hdBadge.className = 'hd-badge';
     hdBadge.textContent = 'HD';
