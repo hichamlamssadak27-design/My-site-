@@ -153,7 +153,7 @@ h1.site-title, a.site-title { font-family:'Playfair Display',serif; font-size:32
 .watch-see-more-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; padding:0; max-width:100%; }
 .watch-see-more-grid .app-card h3 { font-size:12px; }
 .pagination { display:flex; justify-content:center; align-items:center; gap:18px; padding:20px 16px 10px; flex-wrap:nowrap; overflow-x:auto; }
-.page-btn { min-width:auto; height:auto; padding:6px; display:flex; align-items:center; justify-content:center; background:none; border:none; border-radius:50%; color:var(--muted); font-family:'Outfit',sans-serif; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.25s; width:30px; height:30px; }
+.page-btn { min-width:auto; height:auto; padding:6px; display:flex; align-items:center; justify-content:center; background:none; border:none; border-radius:50%; color:var(--muted); font-family:'Outfit',sans-serif; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.25s; width:30px; height:30px; text-decoration:none; }
 .page-btn:hover { color:var(--text); }
 .page-btn.active { background:var(--dark3); color:var(--text); font-weight:700; }
 .page-btn.disabled { opacity:0.3; pointer-events:none; }
