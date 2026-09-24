@@ -1,142 +1,326 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Watch | Streamly</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Watch — Animeog</title>
+    <meta name="theme-color" content="#0A0A0F">
+    <link rel="icon" href="https://i.postimg.cc/QVG5rNs2/43431dd6704d2787b1bf98d80d7f9b78.jpg" type="image/jpeg">
+    <link rel="shortcut icon" href="https://i.postimg.cc/QVG5rNs2/43431dd6704d2787b1bf98d80d7f9b78.jpg" type="image/jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="fullAppContainer">
 
-<header>
-  <div class="header-row">
-    <a class="brand" href="index.html?view=feed">
-      <span class="brand-mark">H</span>
-      <span class="brand-name">hicham</span>
-    </a>
+  <div id="watchPage" class="watch-view">
+    <a class="watch-site-title" href="index.html" style="text-decoration:none;">Animeog</a>
+    <div class="watch-header">
+        <a href="index.html" class="back-btn">← Back</a>
+    </div>
+    <div class="video-wrapper" onclick="startPlayback()">
+      <div class="video-container">
+        <img id="watchImage" src="" alt="Watch Thumbnail" draggable="false" oncontextmenu="return false;">
+        <div class="video-overlay"></div>
+        <span class="hd-badge">HD</span>
+        <div class="video-views" id="watchViews"></div>
+      </div>
+      <div class="play-icon">
+        <div class="play-circle"></div>
+        <svg class="play-triangle" viewBox="0 0 24 24" fill="none">
+          <path d="M6 3.5C6 2.24 7.41 1.5 8.45 2.2L19.5 9.7C20.42 10.33 20.42 11.67 19.5 12.3L8.45 19.8C7.41 20.5 6 19.76 6 18.5V3.5Z" fill="#F0F0F0" stroke="#F0F0F0" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    <div class="player-controls" onclick="event.stopPropagation()">
+        <div class="ctrl-icon" onclick="startPlayback()">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 3.5C6 2.24 7.41 1.5 8.45 2.2L19.5 9.7C20.42 10.33 20.42 11.67 19.5 12.3L8.45 19.8C7.41 20.5 6 19.76 6 18.5V3.5Z" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="toggle-switch"><div class="knob"></div></div>
+        <span class="player-time" id="playerTime">0:00</span>
+        <div class="ctrl-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+        </div>
+        <div class="player-progress"><div class="fill"></div><div class="knob"></div></div>
+        <div class="ctrl-icon"><div class="cc-icon">CC</div></div>
+        <div class="ctrl-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <div class="ctrl-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        </div>
+        <div class="ctrl-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8V3h5"/><path d="M21 8V3h-5"/><path d="M3 16v5h5"/><path d="M21 16v5h-5"/></svg>
+        </div>
+    </div>
+    </div>
+    <button class="download-btn" onclick="showQualityMenu()">
+        <span class="dl-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        </span>
+        <span class="dl-text">
+            <span class="dl-title">Download Episode</span>
+            <span class="dl-sub">Fast & secure link</span>
+        </span>
+        <span class="dl-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+    </button>
+    <div class="watch-details-container">
+        <h3>▶ Episodes (<span id="epCountLabel">0</span>)</h3>
+        <div class="episode-list" id="episodeListContainer"></div>
+    </div>
+    <div class="watch-details-container">
+        <h3>★ Details</h3>
+        <p id="watchDetails" style="font-size:15px;line-height:1.8;"></p>
+    </div>
+    <div class="watch-details-container">
+        <h3>★ See More</h3>
+        <div class="watch-see-more-grid" id="watchSeeMoreContainer"></div>
+    </div>
+    <div class="site-footer">
+        <p class="copyright">© 2026 Animeog. All rights reserved.</p>
+        <span class="how-to-watch" onclick="openHowToWatchModal()">📖 How to Watch</span>
+    </div>
   </div>
-</header>
 
-<main id="app"></main>
+  <div id="howToWatchModal" class="modal-overlay" onclick="if(event.target===this){closeHowToWatchModal();}">
+    <div class="modal-content htw-content">
+        <h3>📖 How to Watch</h3>
+        <ol class="htw-steps">
+            <li><span><strong>Choose an episode</strong><br>Pick any anime from the homepage and tap on it.</span></li>
+            <li><span><strong>Tap the play button</strong><br>This opens the verification step for that episode.</span></li>
+            <li><span><strong>Complete 1 offer</strong><br>Follow the instructions to unlock the episode.</span></li>
+            <li><span><strong>Return and watch</strong><br>Once your offer is completed and verified, come back here to watch.</span></li>
+        </ol>
+        <button class="verify-btn" onclick="closeHowToWatchModal(); startPlayback();">Got it→</button>
+    </div>
+  </div>
 
-<nav class="tabbar" id="tabbar"></nav>
+  <div id="verificationModal" class="modal-overlay" onclick="if(event.target===this){closeVerificationModal();history.back();}">
+    <div class="modal-content">
+        <div class="verify-thumb-wrap">
+            <img id="verifyThumb" src="" alt="Episode thumbnail" draggable="false" oncontextmenu="return false;">
+            <div class="verify-thumb-overlay">
+                <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+            </div>
+        </div>
+        <h3>Processing...</h3>
+        <p>This anime is for registered users only.</p>
+        <p style="margin-bottom:14px;">Complete 1 offer to watch.</p>
+      <p>You can watch all anime after completing the offer👇</p>
+        <div id="offerContainer" class="offer-container"><p class="offer-loading">Loading offers…</p></div>
+    </div>
+  </div>
 
+  <div id="qualityModal" class="modal-overlay" onclick="if(event.target===this){closeQualityMenu();}">
+    <div class="modal-content quality-modal-content">
+        <h3>⬇️ Select Quality</h3>
+        <ul class="quality-list">
+            <li class="quality-item" onclick="selectQuality('480p')"><span class="q-label">480p</span><span class="q-size">SD</span></li>
+            <li class="quality-item" onclick="selectQuality('720p')"><span class="q-label">720p</span><span class="q-size">HD</span></li>
+            <li class="quality-item" onclick="selectQuality('1080p')"><span class="q-label">1080p</span><span class="q-size">Full HD</span></li>
+            <li class="quality-item" onclick="selectQuality('2160p')"><span class="q-label">2160p</span><span class="q-size">2K</span></li>
+        </ul>
+    </div>
+  </div>
+
+</div>
 <script src="data.js"></script>
 <script>
-/* ================================================================
-   This page renders TWO possible things depending on the URL:
-     watch.html?channel=ID&video=INDEX   -> a normal video
-     watch.html?live=INDEX               -> a live stream
-   Both real, loadable, bookmarkable, shareable links.
-   ================================================================ */
-const params = new URLSearchParams(location.search);
-document.getElementById('tabbar').innerHTML = tabbarHTML();
+    let currentGameIndex = 0;
+    let currentEpisodeIndex = 0;
 
-function upNextItem(cid, i, v, color){
-  return `<a class="up-next-item" href="watch.html?channel=${encodeURIComponent(cid)}&video=${i}">
-    ${thumbHTML(v, color, i+9, `<span class="duration">${v.dur}</span>`)}
-    <div class="info">
-      <div class="video-title">${escapeHTML(v.title)}</div>
-      <div class="video-sub">${v.views} &middot; ${timeAgo(v.uploaded)}</div>
-    </div>
-  </a>`;
-}
+    // ===== AdBlueMedia Offer Feed integration =====
+    const ADBM_USER_ID = '777942';
+    const ADBM_OFFERS_API_KEY = 'faafcc4e6e612422313a5d7514451b70';
+    const ADBM_OFFERS_FEED_URL = 'https://d3r33tlb373kwk.cloudfront.net/public/offers/feed.php';
+    const ADBM_CHECK_LEADS_URL = 'https://d3r33tlb373kwk.cloudfront.net/public/external/check2.php';
+    let leadCheckInterval = null;
 
-function tagRow(tags){
-  return `<div class="tag-row">` + (tags||[]).map(t=>
-    `<a class="tag-chip" href="index.html?view=tag&tag=${encodeURIComponent(t)}">#${escapeHTML(t)}</a>`
-  ).join('') + `</div>`;
-}
-
-let html = '';
-
-if(params.has('live')){
-  highlightTab('live');
-  const idx = Number(params.get('live'));
-  const ls = LIVE_STREAMS[idx];
-  const c = ls ? findChannel(ls.channelId) : null;
-
-  if(!ls || !c){
-    html = `<a class="back-btn" href="index.html?view=live">&larr; Live</a><p class="empty-msg">Stream not found.</p>`;
-  } else {
-    const playerImg = ls.thumbUrl ? `<img src="${escapeAttr(ls.thumbUrl)}" alt="" onerror="this.remove()">` : '';
-    html += `<a class="back-btn" href="index.html?view=live">&larr; Live</a>`;
-    html += `<a class="player" href="${LIVE_LINK}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, ${c.color}2e, #0d1215)">
-        ${playerImg}
-        <span class="live-badge"><span class="pulse"></span>LIVE</span>
-        <span class="center-play"><svg width="22" height="22" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L13 8L4 13.5V2.5Z" fill="#fff"/></svg></span>
-      </a>`;
-    html += `<div class="viewers" style="margin-bottom:16px;"><span class="pulse"></span>${ls.viewers}</div>`;
-    html += `<h1 class="watch-title">${escapeHTML(ls.title)}</h1>`;
-    html += tagRow(ls.tags);
-    html += `<div class="watch-meta-row">
-        <a href="channel.html?channel=${encodeURIComponent(c.id)}">${avatarHTML(c)}</a>
-        <div class="watch-chan-info">
-          <a class="channel-name" href="channel.html?channel=${encodeURIComponent(c.id)}">${escapeHTML(c.name)}</a>
-          <div class="channel-meta">${c.subs}</div>
-        </div>
-        <a class="site-btn" href="${LIVE_LINK}" target="_blank" rel="noopener">${SITE_ICON} Visit website</a>
-      </div>`;
-    html += `<div class="watch-desc">${escapeHTML(ls.desc||'')}</div>`;
-    html += categoryChipsHTML(ls.categories);
-
-    const others = LIVE_STREAMS.map((l,i)=>({l,i})).filter(o=>o.i!==idx);
-    if(others.length){
-      html += `<h3 class="up-next">Other Live Streams</h3>`;
-      html += `<div class="up-next-list">` + others.map(o=>{
-        const oc = findChannel(o.l.channelId);
-        return `<a class="up-next-item" href="watch.html?live=${o.i}">
-          ${thumbHTML(o.l, oc.color, o.i+5, `<span class="live-badge"><span class="pulse"></span>LIVE</span>`)}
-          <div class="info">
-            <div class="video-title">${escapeHTML(o.l.title)}</div>
-            <div class="video-sub">${escapeHTML(oc.name)} &middot; ${o.l.viewers}</div>
-          </div>
-        </a>`;
-      }).join('') + `</div>`;
+    // Lightweight JSONP loader (no jQuery dependency) — the feed API only supports JSONP.
+    function jsonpRequest(url, timeoutMs) {
+        return new Promise(function(resolve, reject) {
+            const callbackName = 'abmCb_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+            const script = document.createElement('script');
+            let settled = false;
+            function cleanup() {
+                delete window[callbackName];
+                if (script.parentNode) script.parentNode.removeChild(script);
+            }
+            window[callbackName] = function(data) {
+                settled = true;
+                cleanup();
+                resolve(data);
+            };
+            script.onerror = function() {
+                if (!settled) { cleanup(); reject(new Error('JSONP request failed')); }
+            };
+            script.src = url + (url.indexOf('?') > -1 ? '&' : '?') + 'callback=' + callbackName;
+            document.body.appendChild(script);
+            if (timeoutMs) {
+                setTimeout(function() {
+                    if (!settled) { cleanup(); reject(new Error('JSONP timeout')); }
+                }, timeoutMs);
+            }
+        });
     }
-  }
-} else {
-  const c = findChannel(params.get('channel'));
-  const idx = Number(params.get('video'));
-  const v = c ? c.videos[idx] : null;
 
-  if(!c || !v){
-    html = `<a class="back-btn" href="index.html?view=feed">&larr; Home</a><p class="empty-msg">Video not found.</p>`;
-  } else {
-    const playerImg = v.thumbUrl ? `<img src="${escapeAttr(v.thumbUrl)}" alt="" onerror="this.remove()">` : '';
-    html += `<a class="back-btn" href="channel.html?channel=${encodeURIComponent(c.id)}">&larr; ${escapeHTML(c.name)}</a>`;
-    html += `<a class="player" href="${WATCH_LINK}" target="_blank" rel="noopener" style="background:linear-gradient(135deg, ${c.color}2e, #0d1215)">
-        ${playerImg}
-        <span class="center-play"><svg width="22" height="22" viewBox="0 0 16 16" fill="none"><path d="M4 2.5L13 8L4 13.5V2.5Z" fill="#fff"/></svg></span>
-      </a>`;
-    html += `<div class="progress-row">
-        <span class="time-label">00:00</span>
-        <div class="progress-track"><div class="progress-fill" style="width:0%"></div></div>
-        <span class="time-label">${v.dur}</span>
-      </div>`;
-    html += `<h1 class="watch-title">${escapeHTML(v.title)}</h1>`;
-    html += tagRow(v.tags);
-    html += `<div class="watch-meta-row">
-        <a href="channel.html?channel=${encodeURIComponent(c.id)}">${avatarHTML(c)}</a>
-        <div class="watch-chan-info">
-          <a class="channel-name" href="channel.html?channel=${encodeURIComponent(c.id)}">${escapeHTML(c.name)}</a>
-          <div class="channel-meta">${c.subs}</div>
-        </div>
-        <span class="watch-stats">${v.views}</span>
-        <a class="site-btn" href="${WATCH_LINK}" target="_blank" rel="noopener">${SITE_ICON} Visit website</a>
-      </div>`;
-    html += `<div class="watch-desc">${escapeHTML(v.desc)}<br><br><span style="color:var(--muted)">${timeAgo(v.uploaded)} &middot; ${v.views}</span></div>`;
-    html += categoryChipsHTML(v.categories);
+    function loadOfferFeed() {
+        const container = document.getElementById('offerContainer');
+        if (!container) return;
+        container.innerHTML = '<p class="offer-loading">Loading offers…</p>';
+        const url = ADBM_OFFERS_FEED_URL + '?user_id=' + encodeURIComponent(ADBM_USER_ID) +
+                    '&api_key=' + encodeURIComponent(ADBM_OFFERS_API_KEY) + '&s1=&s2=';
+        jsonpRequest(url, 8000).then(function(offers) {
+            container.innerHTML = '';
+            if (!offers || !offers.length) {
+                container.innerHTML = '<p class="offer-loading">No offers available right now — check back soon.</p>';
+                return;
+            }
+            offers.slice(0, 2).forEach(function(offer) {
+                const item = document.createElement('a');
+                item.className = 'offer-item';
+                item.href = offer.url;
+                item.target = '_blank';
+                item.rel = 'noopener';
+                if (offer.conversion) item.title = offer.conversion;
+                item.textContent = offer.anchor || 'Complete this offer';
+                container.appendChild(item);
+            });
+        }).catch(function(err) {
+            container.innerHTML = '<p class="offer-loading">Could not load offers right now. Please try again.</p>';
+            console.warn('AdBlueMedia offer feed error:', err);
+        });
+    }
 
-    const others = c.videos.map((vv,i)=>({vv,i})).filter(o=>o.i!==idx);
-    html += `<h3 class="up-next">More from ${escapeHTML(c.name)}</h3>`;
-    html += `<div class="up-next-list">` + others.map(o=>upNextItem(c.id, o.i, o.vv, c.color)).join('') + `</div>`;
-  }
-}
+    // Polls every 15 seconds while the offer modal is open. If the visitor has
+    // completed an offer, the episode unlocks automatically.
+    function checkLeads() {
+        const url = ADBM_CHECK_LEADS_URL + '?testing=0';
+        jsonpRequest(url, 8000).then(function(leads) {
+            const completedLeads = leads ? leads.length : 0;
+            if (completedLeads > 0) {
+                console.log('Lead completed — unlocking episode automatically.');
+                stopLeadCheck();
+                openFinalPlayer();
+            }
+        }).catch(function(err) {
+            console.warn('AdBlueMedia lead check error:', err);
+        });
+    }
 
-document.getElementById('app').innerHTML = html;
+    function startLeadCheck() {
+        stopLeadCheck();
+        leadCheckInterval = setInterval(checkLeads, 15000);
+    }
+    function stopLeadCheck() {
+        if (leadCheckInterval) { clearInterval(leadCheckInterval); leadCheckInterval = null; }
+    }
+
+    window.showVerificationModal = function() {
+        const thumbEl = document.getElementById('verifyThumb');
+        if (thumbEl && games[currentGameIndex]) {
+            const eps = generateEpisodes(games[currentGameIndex]);
+            const ep = eps[currentEpisodeIndex];
+            thumbEl.src = (ep && ep.thumbnail) || games[currentGameIndex].img;
+        }
+        document.getElementById('verificationModal').style.display = 'flex';
+        history.pushState(null, '', '#modal');
+        loadOfferFeed();
+        startLeadCheck();
+    }
+    window.closeVerificationModal = function() {
+        document.getElementById('verificationModal').style.display = 'none';
+        stopLeadCheck();
+    }
+    window.openHowToWatchModal = function() { document.getElementById('howToWatchModal').style.display = 'flex'; }
+    window.closeHowToWatchModal = function() { document.getElementById('howToWatchModal').style.display = 'none'; }
+    window.showQualityMenu = function() {
+        document.getElementById('qualityModal').style.display = 'flex';
+        history.pushState(null, '', '#quality');
+    }
+    window.closeQualityMenu = function() { document.getElementById('qualityModal').style.display = 'none'; }
+    window.selectQuality = function(quality) {
+        closeQualityMenu();
+        startPlayback();
+    }
+    window.openFinalPlayer = function() { closeVerificationModal(); }
+    window.startPlayback = function() { showVerificationModal(); }
+
+    window.addEventListener('popstate', function() {
+        const modal = document.getElementById('verificationModal');
+        const qModal = document.getElementById('qualityModal');
+        if (modal.style.display === 'flex') { modal.style.display = 'none'; stopLeadCheck(); }
+        else if (qModal.style.display === 'flex') { qModal.style.display = 'none'; }
+    });
+
+    function renderEpisodeList(gameIndex, activeIndex) {
+        const game = games[gameIndex];
+        const eps = generateEpisodes(game);
+        const container = document.getElementById('episodeListContainer');
+        const countLabel = document.getElementById('epCountLabel');
+        if (countLabel) countLabel.textContent = eps.length;
+        container.innerHTML = '';
+        for (let i = 0; i < eps.length; i++) {
+            const ep = eps[i];
+            const epNum = i + 1;
+            const item = document.createElement('div');
+            item.className = 'episode-item' + (i === activeIndex ? ' active' : '');
+            item.setAttribute('role', 'button');
+            item.setAttribute('tabindex', '0');
+            item.setAttribute('aria-label', 'Play Episode ' + epNum);
+            item.onclick = (function(idx){ return function(){ window.location.href = 'watch.html?id=' + gameIndex + '&ep=' + idx; }; })(i);
+            item.onkeydown = function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.click(); } };
+            item.innerHTML =
+                '<div class="episode-thumb"><span class="ep-num-badge">EP ' + String(epNum).padStart(2,'0') + '</span>' +
+                '<img src="' + ep.thumbnail + '" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;" alt="Episode ' + epNum + ' thumbnail" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x170/1A1A24/FF2D55?text=Animeog\';"></div>' +
+                '<div class="episode-info"><div class="ep-title">Episode ' + epNum + '</div><div class="ep-date">' + ep.date + '</div></div>' +
+                '<div class="episode-play-btn"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3.5C6 2.24 7.41 1.5 8.45 2.2L19.5 9.7C20.42 10.33 20.42 11.67 19.5 12.3L8.45 19.8C7.41 20.5 6 19.76 6 18.5V3.5Z" fill="currentColor"/></svg></div>';
+            container.appendChild(item);
+        }
+    }
+
+    function renderWatchPage(gameIndex, episodeIndex) {
+        const game = games[gameIndex];
+        if (!game) { window.location.href = 'index.html'; return; }
+        const episodes = generateEpisodes(game);
+        const episode = episodes[episodeIndex] || episodes[0];
+        if (!episode) return;
+
+        currentGameIndex = gameIndex;
+        currentEpisodeIndex = episodeIndex;
+
+        document.title = game.title + ' — Episode ' + (episodeIndex + 1) + ' — Animeog';
+        document.getElementById('watchImage').src = episode.thumbnail || game.img;
+        document.getElementById('playerTime').textContent = episode.duration || '0:00';
+        document.getElementById('watchViews').textContent = '👁 ' + game.views.replace(' Total views', '');
+
+        const epLabel = game.epCount + (game.epCount === 1 ? ' Episode' : ' Episodes');
+        document.getElementById('watchDetails').innerHTML =
+            '<strong>Anime:</strong> ' + game.title + '<br>' +
+            '<strong>Episodes:</strong> ' + epLabel + '<br>' +
+            '<strong>Date:</strong> ' + episode.date + '<br>' +
+            '<strong>Views:</strong> ' + game.views;
+
+        renderEpisodeList(gameIndex, episodeIndex);
+
+        const seeMoreContainer = document.getElementById('watchSeeMoreContainer');
+        seeMoreContainer.innerHTML = '';
+        const candidates = games.filter(function(g, i){ return i !== gameIndex; });
+        // Fisher-Yates shuffle (unbiased, unlike sort(()=>Math.random()-0.5))
+        for (let i = candidates.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const tmp = candidates[i]; candidates[i] = candidates[j]; candidates[j] = tmp;
+        }
+        candidates.slice(0, 2).forEach(function(g){ createAnimeCard(g, games.indexOf(g), seeMoreContainer); });
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(location.search);
+        const id = parseInt(params.get('id')) || 0;
+        const ep = parseInt(params.get('ep')) || 0;
+        renderWatchPage(id, ep);
+    });
 </script>
 </body>
 </html>
