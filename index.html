@@ -81,23 +81,26 @@
         renderPagination();
     }
 
-    function goToPage(pageNum) {
-        renderCardsPage(pageNum);
-        document.getElementById('cardContainer').scrollIntoView({behavior:'smooth', block:'start'});
-        history.replaceState(null, '', pageNum === 1 ? 'index.html' : ('index.html?page=' + pageNum));
-    }
-
     function renderPagination() {
         const totalPages = Math.ceil(games.length / CARDS_PER_PAGE);
         const wrap = document.getElementById('paginationContainer');
         wrap.innerHTML = '';
         if (totalPages <= 1) return;
 
-        const prevBtn = document.createElement('div');
-        prevBtn.className = 'page-btn arrow' + (currentPage === 1 ? ' disabled' : '');
-        prevBtn.textContent = '‹';
-        prevBtn.onclick = function(){ if (currentPage > 1) goToPage(currentPage - 1); };
-        wrap.appendChild(prevBtn);
+        function pageUrl(n) { return n === 1 ? 'index.html' : ('index.html?page=' + n); }
+
+        if (currentPage === 1) {
+            const span = document.createElement('span');
+            span.className = 'page-btn arrow disabled';
+            span.textContent = '‹';
+            wrap.appendChild(span);
+        } else {
+            const a = document.createElement('a');
+            a.className = 'page-btn arrow';
+            a.textContent = '‹';
+            a.href = pageUrl(currentPage - 1);
+            wrap.appendChild(a);
+        }
 
         let windowStart = currentPage - 1;
         let windowEnd = currentPage + 1;
@@ -105,18 +108,32 @@
         if (windowEnd > totalPages) { windowEnd = totalPages; windowStart = Math.max(1, totalPages - 2); }
 
         for (let i = windowStart; i <= windowEnd; i++) {
-            const btn = document.createElement('div');
-            btn.className = 'page-btn' + (i === currentPage ? ' active' : '');
-            btn.textContent = i;
-            btn.onclick = function(){ goToPage(i); };
-            wrap.appendChild(btn);
+            if (i === currentPage) {
+                const span = document.createElement('span');
+                span.className = 'page-btn active';
+                span.textContent = i;
+                wrap.appendChild(span);
+            } else {
+                const a = document.createElement('a');
+                a.className = 'page-btn';
+                a.textContent = i;
+                a.href = pageUrl(i);
+                wrap.appendChild(a);
+            }
         }
 
-        const nextBtn = document.createElement('div');
-        nextBtn.className = 'page-btn arrow' + (currentPage === totalPages ? ' disabled' : '');
-        nextBtn.textContent = '›';
-        nextBtn.onclick = function(){ if (currentPage < totalPages) goToPage(currentPage + 1); };
-        wrap.appendChild(nextBtn);
+        if (currentPage === totalPages) {
+            const span = document.createElement('span');
+            span.className = 'page-btn arrow disabled';
+            span.textContent = '›';
+            wrap.appendChild(span);
+        } else {
+            const a = document.createElement('a');
+            a.className = 'page-btn arrow';
+            a.textContent = '›';
+            a.href = pageUrl(currentPage + 1);
+            wrap.appendChild(a);
+        }
     }
 
     function handleSearch(query) {
@@ -148,10 +165,9 @@
             const originalIndex = games.indexOf(game);
             const item = document.createElement('div');
             item.className = 'slider-item';
-            item.innerHTML = '<div class="rank-badge">#' + (index+1) + '</div><img data-src="' + game.img + '" decoding="async" draggable="false" oncontextmenu="return false;" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x450/1A1A24/FF2D55?text=Animeog\';">';
+            item.innerHTML = '<div class="rank-badge">#' + (index+1) + '</div><img src="' + game.img + '" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x450/1A1A24/FF2D55?text=Animeog\';">';
             item.onclick = function(){ window.location.href = 'watch.html?id=' + originalIndex; };
             slider.appendChild(item);
-            lazyObserve(item.querySelector('img'));
         });
     }
 
@@ -162,10 +178,9 @@
             const originalIndex = games.indexOf(game);
             const item = document.createElement('div');
             item.className = 'slider-item';
-            item.innerHTML = '<div class="rank-badge" style="background:linear-gradient(135deg,var(--gold),#C99A2E);color:#1A1A24;">NEW</div><img data-src="' + game.img + '" decoding="async" draggable="false" oncontextmenu="return false;" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x450/1A1A24/FF2D55?text=Animeog\';">';
+            item.innerHTML = '<div class="rank-badge" style="background:linear-gradient(135deg,var(--gold),#C99A2E);color:#1A1A24;">NEW</div><img src="' + game.img + '" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x450/1A1A24/FF2D55?text=Animeog\';">';
             item.onclick = function(){ window.location.href = 'watch.html?id=' + originalIndex; };
             slider.appendChild(item);
-            lazyObserve(item.querySelector('img'));
         });
     }
 
