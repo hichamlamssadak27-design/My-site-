@@ -1,194 +1,182 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Streamly | Channel Platform</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Animeog — Watch Anime Online</title>
+    <meta name="description" content="Watch subbed and dubbed anime online for free on Animeog — new releases, most watched titles, and full episode library.">
+    <meta property="og:title" content="Animeog — Watch Anime Online">
+    <meta property="og:description" content="Watch subbed and dubbed anime online for free on Animeog.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0A0A0F">
+    <link rel="icon" href="https://i.postimg.cc/QVG5rNs2/43431dd6704d2787b1bf98d80d7f9b78.jpg" type="image/jpeg">
+    <link rel="shortcut icon" href="https://i.postimg.cc/QVG5rNs2/43431dd6704d2787b1bf98d80d7f9b78.jpg" type="image/jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="fullAppContainer">
 
-<header>
-  <div class="header-row">
-    <a class="brand" href="index.html?view=feed">
-      <span class="brand-mark">H</span>
-      <span class="brand-name">hicham</span>
-    </a>
-    <button class="search-toggle-btn" id="searchToggle" aria-label="Search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-    </button>
+  <div class="side-menu-overlay" id="sideMenuOverlay" onclick="closeSideMenu()"></div>
+  <div class="side-menu" id="sideMenu">
+    <div class="side-menu-close" onclick="closeSideMenu()">← Close menu</div>
+    <a class="side-menu-item" href="index.html"><span class="dot"></span>Home</a>
+    <a class="side-menu-item" href="channel.html?type=most_watched"><span class="dot"></span>Most Watched</a>
+    <a class="side-menu-item" href="channel.html?type=new_release"><span class="dot"></span>New Release</a>
+    <a class="side-menu-item" href="channel.html?type=subbed"><span class="dot"></span>Subbed Anime</a>
+    <a class="side-menu-item" href="channel.html?type=dubbed"><span class="dot"></span>Dubbed Anime</a>
+    <div class="side-menu-item" onclick="closeSideMenu(); openHowToWatchModal();"><span class="dot"></span>How to Watch</div>
   </div>
-  <div class="search-bar-row" id="searchBarRow">
-    <!-- A real HTML form: submitting it is a normal page load to
-         index.html?view=search&q=... , not JavaScript pretending. -->
-    <form class="search-wrap" method="GET" action="index.html">
-      <input type="hidden" name="view" value="search">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input type="text" name="q" id="searchInput" placeholder="Search for a channel or video...">
-    </form>
+
+  <div id="mainPage">
+    <div class="site-header">
+        <div class="menu-btn" onclick="openSideMenu()"><span></span><span></span><span></span></div>
+        <h1 class="site-title" style="cursor:default;">Animeog</h1>
+        <p class="site-tagline">Exclusive Anime</p>
+    </div>
+    <div class="section-title"><span class="dot"></span>🔥 Most Watched<span class="line"></span></div>
+    <div class="horizontal-slider" id="sliderContainer"></div>
+    <div class="section-title"><span class="dot"></span>🆕 New Release<span class="line"></span></div>
+    <div class="horizontal-slider" id="newReleaseSlider"></div>
+    <div class="section-title"><span class="dot"></span>📂 All Anime<span class="line"></span></div>
+    <div style="padding:0 16px 14px;">
+        <input type="search" id="animeSearch" class="search-input" placeholder="🔍 Search anime..." oninput="handleSearch(this.value)" aria-label="Search anime">
+    </div>
+    <div class="app-container" id="cardContainer"></div>
+    <div class="pagination" id="paginationContainer"></div>
+    <div class="site-footer">
+        <p class="copyright">© 2026 Animeog. All rights reserved.</p>
+        <span class="how-to-watch" onclick="openHowToWatchModal()">📖 How to Watch</span>
+    </div>
   </div>
-</header>
 
-<main id="app"></main>
+  <div id="howToWatchModal" class="modal-overlay" onclick="if(event.target===this){closeHowToWatchModal();}">
+    <div class="modal-content htw-content">
+        <h3>📖 How to Watch</h3>
+        <ol class="htw-steps">
+            <li><span><strong>Choose an episode</strong><br>Pick any anime from the homepage and tap on it.</span></li>
+            <li><span><strong>Tap the play button</strong><br>This opens the verification step for that episode.</span></li>
+            <li><span><strong>Complete 1 offer</strong><br>Follow the instructions to unlock the episode.</span></li>
+            <li><span><strong>Return and watch</strong><br>Once your offer is completed and verified, come back here to watch.</span></li>
+        </ol>
+        <button class="verify-btn" onclick="closeHowToWatchModal();">Got it→</button>
+    </div>
+  </div>
 
-<nav class="tabbar" id="tabbar"></nav>
-
+</div>
 <script src="data.js"></script>
 <script>
-/* ================================================================
-   index.html only ever needs to know one thing from the URL: which
-   "view" to show. Everything else (?cat=, ?tag=, ?q=) is read by
-   the matching render function below.
-   ================================================================ */
-const params = new URLSearchParams(location.search);
-const view = params.get('view') || 'feed';
+    const CARDS_PER_PAGE = 10;
+    let currentPage = 1;
 
-document.getElementById('tabbar').innerHTML = tabbarHTML();
-highlightTab(view==='category' ? 'categories' : (view==='tag' || view==='search' ? null : view));
+    function renderCardsPage(pageNum) {
+        const container = document.getElementById('cardContainer');
+        container.innerHTML = '';
+        const start = (pageNum - 1) * CARDS_PER_PAGE;
+        const end = start + CARDS_PER_PAGE;
+        games.forEach(function(game, index) {
+            if (index >= start && index < end) createAnimeCard(game, index, container);
+        });
+        currentPage = pageNum;
+        renderPagination();
+    }
 
-// Keep the search box open + filled if we're on the search view.
-if(view==='search'){
-  document.getElementById('searchBarRow').classList.add('open');
-  document.getElementById('searchInput').value = params.get('q') || '';
-}
-document.getElementById('searchToggle').addEventListener('click', function(){
-  const row = document.getElementById('searchBarRow');
-  const opened = row.classList.toggle('open');
-  if(opened) document.getElementById('searchInput').focus();
-});
+    function goToPage(pageNum) {
+        renderCardsPage(pageNum);
+        document.getElementById('cardContainer').scrollIntoView({behavior:'smooth', block:'start'});
+        history.replaceState(null, '', pageNum === 1 ? 'index.html' : ('index.html?page=' + pageNum));
+    }
 
-function videoCard(c, v, i){
-  return `<a class="video-card" href="watch.html?channel=${encodeURIComponent(c.id)}&video=${i}">
-    ${thumbHTML(v, c.color, i+1, `<span class="duration">${v.dur}</span>`)}
-    <div class="video-title">${escapeHTML(v.title)}</div>
-    <div class="video-sub">${escapeHTML(c.name)} &middot; ${v.views} &middot; ${timeAgo(v.uploaded)}</div>
-  </a>`;
-}
+    function renderPagination() {
+        const totalPages = Math.ceil(games.length / CARDS_PER_PAGE);
+        const wrap = document.getElementById('paginationContainer');
+        wrap.innerHTML = '';
+        if (totalPages <= 1) return;
 
-function feedItem(c, v, i){
-  return `<div class="video-card feed-item">
-    <a href="watch.html?channel=${encodeURIComponent(c.id)}&video=${i}">
-      ${thumbHTML(v, c.color, i+1, `<span class="duration">${v.dur}</span>`)}
-      <div class="video-title">${escapeHTML(v.title)}</div>
-    </a>
-    <div class="feed-item-meta">
-      <a href="channel.html?channel=${encodeURIComponent(c.id)}">${avatarHTML(c)}</a>
-      <a class="video-sub" href="watch.html?channel=${encodeURIComponent(c.id)}&video=${i}">${escapeHTML(c.name)} &middot; ${v.views} &middot; ${timeAgo(v.uploaded)}</a>
-    </div>
-  </div>`;
-}
+        const prevBtn = document.createElement('div');
+        prevBtn.className = 'page-btn arrow' + (currentPage === 1 ? ' disabled' : '');
+        prevBtn.textContent = '‹';
+        prevBtn.onclick = function(){ if (currentPage > 1) goToPage(currentPage - 1); };
+        wrap.appendChild(prevBtn);
 
-function renderFeed(){
-  const order = allVideosFlat().sort((a,b)=> daysSince(a.v.uploaded) - daysSince(b.v.uploaded));
-  let html = `<div class="section-heading"><h2>Latest Videos</h2><span>From all channels</span></div>`;
-  html += `<div class="feed-list">` + order.map(o=>feedItem(o.c,o.v,o.i)).join('') + `</div>`;
-  return html;
-}
+        let windowStart = currentPage - 1;
+        let windowEnd = currentPage + 1;
+        if (windowStart < 1) { windowStart = 1; windowEnd = Math.min(totalPages, 3); }
+        if (windowEnd > totalPages) { windowEnd = totalPages; windowStart = Math.max(1, totalPages - 2); }
 
-function renderTrending(){
-  const all = allVideosFlat().sort((a,b)=>(Number(b.v.viewsNum)||0) - (Number(a.v.viewsNum)||0));
-  let html = `<div class="section-heading"><h2>Trending</h2><span>Ranked by view count</span></div>`;
-  html += `<div class="feed-list">` + all.map(o=>feedItem(o.c,o.v,o.i)).join('') + `</div>`;
-  return html;
-}
+        for (let i = windowStart; i <= windowEnd; i++) {
+            const btn = document.createElement('div');
+            btn.className = 'page-btn' + (i === currentPage ? ' active' : '');
+            btn.textContent = i;
+            btn.onclick = function(){ goToPage(i); };
+            wrap.appendChild(btn);
+        }
 
-function renderLive(){
-  let html = `<div class="section-heading"><h2>Live</h2><span>${LIVE_STREAMS.length} streams active now</span></div>`;
-  if(LIVE_STREAMS.length===0){
-    html += `<div class="no-live">No live streams right now.</div>`;
-  } else {
-    html += LIVE_STREAMS.map((ls, i)=>{
-      const c = findChannel(ls.channelId);
-      return `<a class="live-hero" href="watch.html?live=${i}">
-        ${thumbHTML(ls, c.color, 3, `<span class="live-badge"><span class="pulse"></span>LIVE</span>`)}
-        <div>
-          <div class="live-title">${escapeHTML(ls.title)}</div>
-          <div class="channel-meta" style="margin-bottom:6px;">${escapeHTML(c.name)}</div>
-          <div class="viewers"><span class="pulse"></span>${ls.viewers}</div>
-        </div>
-      </a>`;
-    }).join('');
-  }
-  return html;
-}
+        const nextBtn = document.createElement('div');
+        nextBtn.className = 'page-btn arrow' + (currentPage === totalPages ? ' disabled' : '');
+        nextBtn.textContent = '›';
+        nextBtn.onclick = function(){ if (currentPage < totalPages) goToPage(currentPage + 1); };
+        wrap.appendChild(nextBtn);
+    }
 
-function renderCategories(){
-  let html = `<div class="section-heading"><h2>Categories</h2><span>${CATEGORIES.length} categories</span></div>`;
-  html += `<div class="category-grid">` + CATEGORIES.map(cat=>{
-    const count = CHANNELS.filter(c=>c.category===cat.id).reduce((s,c)=>s+c.videos.length,0);
-    return `<a class="category-card" href="index.html?view=category&cat=${encodeURIComponent(cat.id)}">
-      ${categoryImageHTML(cat)}
-      <div class="cat-name">${escapeHTML(cat.name)}</div>
-      <div class="cat-count">${count} videos</div>
-    </a>`;
-  }).join('') + `</div>`;
-  return html;
-}
+    function handleSearch(query) {
+        const container = document.getElementById('cardContainer');
+        const pagContainer = document.getElementById('paginationContainer');
+        const q = query.trim().toLowerCase();
+        if (!q) {
+            pagContainer.style.display = '';
+            renderCardsPage(1);
+            return;
+        }
+        pagContainer.style.display = 'none';
+        container.innerHTML = '';
+        const results = games.filter(function(g){
+            const haystack = (g.title + ' ' + g.subDub + ' ' + g.epCount + ' episodes').toLowerCase();
+            return haystack.indexOf(q) !== -1;
+        });
+        if (results.length === 0) {
+            container.innerHTML = '<div class="no-results">No anime found for "' + query.replace(/</g,'&lt;') + '"</div>';
+            return;
+        }
+        results.forEach(function(g){ createAnimeCard(g, games.indexOf(g), container); });
+    }
 
-function renderCategoryDetail(){
-  const cat = CATEGORIES.find(c=>c.id===params.get('cat'));
-  if(!cat) return `<p class="empty-msg">Category not found.</p>`;
-  const vids = [];
-  CHANNELS.filter(c=>c.category===cat.id).forEach(c=>c.videos.forEach((v,i)=>vids.push({c,v,i})));
-  let html = `<a class="back-btn" href="index.html?view=categories">&larr; Categories</a>`;
-  html += `<div class="section-heading"><h2>${escapeHTML(cat.name)}</h2><span>${vids.length} videos</span></div>`;
-  html += `<div class="video-grid">` + vids.map(o=>videoCard(o.c,o.v,o.i)).join('') + `</div>`;
-  return html;
-}
+    function initMostWatchedSlider() {
+        const slider = document.getElementById('sliderContainer');
+        const sortedGames = [...games].sort((a, b) => parseInt(b.views.replace(/,/g,'')) - parseInt(a.views.replace(/,/g,'')));
+        sortedGames.slice(0, 10).forEach((game, index) => {
+            const originalIndex = games.indexOf(game);
+            const item = document.createElement('div');
+            item.className = 'slider-item';
+            item.innerHTML = '<div class="rank-badge">#' + (index+1) + '</div><img src="' + game.img + '" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x450/1A1A24/FF2D55?text=Animeog\';">';
+            item.onclick = function(){ window.location.href = 'watch.html?id=' + originalIndex; };
+            slider.appendChild(item);
+        });
+    }
 
-function renderChannels(){
-  let html = `<div class="section-heading"><h2>Channels</h2><span>${CHANNELS.length} active channels</span></div>`;
-  html += `<div class="channel-grid-2col">` + CHANNELS.map(c=>`
-    <a class="channel-card-center" href="channel.html?channel=${encodeURIComponent(c.id)}">
-      <div class="chan-ident">${c.ident}</div>
-      ${avatarHTML(c)}
-      <div class="channel-name">${escapeHTML(c.name)}</div>
-      <div class="channel-meta">${c.videos.length} videos<br>${formatCount(channelTotalViews(c),'views')} total</div>
-    </a>
-  `).join('') + `</div>`;
-  return html;
-}
+    function initNewReleaseSlider() {
+        const slider = document.getElementById('newReleaseSlider');
+        const newest = games.slice(-10).reverse();
+        newest.forEach((game) => {
+            const originalIndex = games.indexOf(game);
+            const item = document.createElement('div');
+            item.className = 'slider-item';
+            item.innerHTML = '<div class="rank-badge" style="background:linear-gradient(135deg,var(--gold),#C99A2E);color:#1A1A24;">NEW</div><img src="' + game.img + '" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;" onerror="this.onerror=null;this.src=\'https://via.placeholder.com/300x450/1A1A24/FF2D55?text=Animeog\';">';
+            item.onclick = function(){ window.location.href = 'watch.html?id=' + originalIndex; };
+            slider.appendChild(item);
+        });
+    }
 
-function renderTagDetail(){
-  const tag = params.get('tag') || '';
-  const vids = allVideosFlat().filter(o=>o.v.tags && o.v.tags.includes(tag));
-  let html = `<a class="back-btn" href="index.html?view=feed">&larr; Home</a>`;
-  html += `<div class="section-heading"><h2>#${escapeHTML(tag)}</h2><span>${vids.length} videos</span></div>`;
-  html += vids.length===0
-    ? `<p class="empty-msg">No videos with this hashtag.</p>`
-    : `<div class="video-grid">` + vids.map(o=>videoCard(o.c,o.v,o.i)).join('') + `</div>`;
-  return html;
-}
+    window.openHowToWatchModal = function() { document.getElementById('howToWatchModal').style.display = 'flex'; }
+    window.closeHowToWatchModal = function() { document.getElementById('howToWatchModal').style.display = 'none'; }
 
-function renderSearch(){
-  const q = (params.get('q') || '').toLowerCase().trim();
-  const catMatch = CATEGORIES.filter(cat=>cat.name.toLowerCase().includes(q)).map(cat=>cat.id);
-  const vids = q ? allVideosFlat().filter(o=>
-    o.v.title.toLowerCase().includes(q) ||
-    (o.v.tags||[]).some(t=>t.toLowerCase().includes(q)) ||
-    catMatch.includes(o.c.category) ||
-    o.c.name.toLowerCase().includes(q)
-  ) : [];
-  let html = `<div class="section-heading"><h2>Search results for "${escapeHTML(q)}"</h2><span>${vids.length} videos</span></div>`;
-  html += vids.length===0
-    ? `<p class="empty-msg">No matching results.</p>`
-    : `<div class="video-grid">` + vids.map(o=>videoCard(o.c,o.v,o.i)).join('') + `</div>`;
-  return html;
-}
-
-let html;
-if(view==='trending') html = renderTrending();
-else if(view==='live') html = renderLive();
-else if(view==='categories') html = renderCategories();
-else if(view==='category') html = renderCategoryDetail();
-else if(view==='channels') html = renderChannels();
-else if(view==='tag') html = renderTagDetail();
-else if(view==='search') html = renderSearch();
-else html = renderFeed();
-
-document.getElementById('app').innerHTML = html;
+    window.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(location.search);
+        const page = parseInt(params.get('page')) || 1;
+        renderCardsPage(page);
+        initMostWatchedSlider();
+        initNewReleaseSlider();
+    });
 </script>
 </body>
 </html>
