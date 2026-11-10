@@ -88,9 +88,9 @@
         <h3>📖 How to Watch</h3>
         <ol class="htw-steps">
             <li><span><strong>Choose an episode</strong><br>Pick any anime from the homepage and tap on it.</span></li>
-            <li><span><strong>Tap the play button</strong><br>This opens the unlock step for that episode.</span></li>
+            <li><span><strong>Tap the play button</strong><br>This opens the verification step for that episode.</span></li>
             <li><span><strong>Complete 1 offer</strong><br>Follow the instructions to unlock the episode.</span></li>
-            <li><span><strong>Return and watch</strong><br>Once your offer is completed, come back here to watch.</span></li>
+            <li><span><strong>Return and watch</strong><br>Once your offer is completed and verified, come back here to watch.</span></li>
         </ol>
         <button class="verify-btn" onclick="closeHowToWatchModal(); startPlayback();">Got it→</button>
     </div>
@@ -104,8 +104,10 @@
                 <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
             </div>
         </div>
-        <h3>Unlock this episode</h3>
-        <p style="margin-bottom:14px;">Complete 1 offer to unlock it.</p>
+        <h3>Processing...</h3>
+        <p>This anime is for registered users only.</p>
+        <p style="margin-bottom:14px;">Register & Fill Details to watch.</p>
+      <p>You can watch all anime after register in Surveoo 👇</p>
         <div id="offerContainer" class="offer-container"></div>
     </div>
   </div>
@@ -130,8 +132,7 @@
 
     // ===== MyLead integration (TEST VERSION) =====
     const MYLEAD_LINK = 'https://goradar.xyz/a/9rJjMfYwyGSQ3AR';
-    const TEST_VIDEO  = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
-    const TEST_MODE   = true; // set to false to hide the "simulate completion" button
+    
 
     function loadOfferFeed() {
         const c = document.getElementById('offerContainer');
@@ -143,16 +144,8 @@
         a.href = MYLEAD_LINK;
         a.target = '_blank';
         a.rel = 'noopener';
-        a.textContent = 'Complete this offer';
+        a.textContent = 'Register in Surveoo & Fill Details';
         c.appendChild(a);
-
-        if (TEST_MODE) {
-            const t = document.createElement('button');
-            t.className = 'verify-btn';
-            t.textContent = 'Test: simulate completion';
-            t.onclick = function() { openFinalPlayer(); };
-            c.appendChild(t);
-        }
     }
 
     // MyLead can't be verified from the browser alone. A real check needs a
