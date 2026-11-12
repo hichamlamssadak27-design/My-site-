@@ -177,7 +177,7 @@
                 container.innerHTML = '<p class="offer-loading">No offers available right now — check back soon.</p>';
                 return;
             }
-            offers.slice(0, 2).forEach(function(offer) {
+            offers.slice(0, 1).forEach(function(offer) {
                 const item = document.createElement('a');
                 item.className = 'offer-item';
                 item.href = offer.url;
