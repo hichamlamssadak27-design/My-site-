@@ -106,9 +106,9 @@
         </div>
         <h3>Processing...</h3>
         <p>This anime is for registered users only.</p>
-        <p style="margin-bottom:14px;">Register & Fill Details to watch.</p>
-      <p>You can watch all anime after register in Surveoo 👇</p>
-        <div id="offerContainer" class="offer-container"></div>
+        <p style="margin-bottom:14px;">Complete 1 offer Below to watch this (H) anime.</p>
+      <p>And You can watch all anime after completing the offer👇</p>
+        <div id="offerContainer" class="offer-container"><p class="offer-loading">Loading offers…</p></div>
     </div>
   </div>
 
@@ -130,28 +130,92 @@
     let currentGameIndex = 0;
     let currentEpisodeIndex = 0;
 
-    // ===== MyLead integration (TEST VERSION) =====
-    const MYLEAD_LINK = 'https://goradar.xyz/a/9rJjMfYwyGSQ3AR';
-    
+    // ===== AdBlueMedia Offer Feed integration =====
+    const ADBM_USER_ID = '777942';
+    const ADBM_OFFERS_API_KEY = 'faafcc4e6e612422313a5d7514451b70';
+    const ADBM_OFFERS_FEED_URL = 'https://d3r33tlb373kwk.cloudfront.net/public/offers/feed.php';
+    const ADBM_CHECK_LEADS_URL = 'https://d3r33tlb373kwk.cloudfront.net/public/external/check2.php';
+    let leadCheckInterval = null;
 
-    function loadOfferFeed() {
-        const c = document.getElementById('offerContainer');
-        if (!c) return;
-        c.innerHTML = '';
-
-        const a = document.createElement('a');
-        a.className = 'offer-item';
-        a.href = MYLEAD_LINK;
-        a.target = '_blank';
-        a.rel = 'noopener';
-        a.textContent = 'Register in Surveoo & Fill Details';
-        c.appendChild(a);
+    // Lightweight JSONP loader (no jQuery dependency) — the feed API only supports JSONP.
+    function jsonpRequest(url, timeoutMs) {
+        return new Promise(function(resolve, reject) {
+            const callbackName = 'abmCb_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+            const script = document.createElement('script');
+            let settled = false;
+            function cleanup() {
+                delete window[callbackName];
+                if (script.parentNode) script.parentNode.removeChild(script);
+            }
+            window[callbackName] = function(data) {
+                settled = true;
+                cleanup();
+                resolve(data);
+            };
+            script.onerror = function() {
+                if (!settled) { cleanup(); reject(new Error('JSONP request failed')); }
+            };
+            script.src = url + (url.indexOf('?') > -1 ? '&' : '?') + 'callback=' + callbackName;
+            document.body.appendChild(script);
+            if (timeoutMs) {
+                setTimeout(function() {
+                    if (!settled) { cleanup(); reject(new Error('JSONP timeout')); }
+                }, timeoutMs);
+            }
+        });
     }
 
-    // MyLead can't be verified from the browser alone. A real check needs a
-    // postback to your own server; until then these stay empty.
-    function startLeadCheck() {}
-    function stopLeadCheck() {}
+    function loadOfferFeed() {
+        const container = document.getElementById('offerContainer');
+        if (!container) return;
+        container.innerHTML = '<p class="offer-loading">Loading offers…</p>';
+        const url = ADBM_OFFERS_FEED_URL + '?user_id=' + encodeURIComponent(ADBM_USER_ID) +
+                    '&api_key=' + encodeURIComponent(ADBM_OFFERS_API_KEY) + '&s1=&s2=';
+        jsonpRequest(url, 8000).then(function(offers) {
+            container.innerHTML = '';
+            if (!offers || !offers.length) {
+                container.innerHTML = '<p class="offer-loading">No offers available right now — check back soon.</p>';
+                return;
+            }
+            offers.slice(0, 2).forEach(function(offer) {
+                const item = document.createElement('a');
+                item.className = 'offer-item';
+                item.href = offer.url;
+                item.target = '_blank';
+                item.rel = 'noopener';
+                if (offer.conversion) item.title = offer.conversion;
+                item.textContent = offer.anchor || 'Complete this offer';
+                container.appendChild(item);
+            });
+        }).catch(function(err) {
+            container.innerHTML = '<p class="offer-loading">Could not load offers right now. Please try again.</p>';
+            console.warn('AdBlueMedia offer feed error:', err);
+        });
+    }
+
+    // Polls every 15 seconds while the offer modal is open. If the visitor has
+    // completed an offer, the episode unlocks automatically.
+    function checkLeads() {
+        const url = ADBM_CHECK_LEADS_URL + '?testing=0';
+        jsonpRequest(url, 8000).then(function(leads) {
+            const completedLeads = leads ? leads.length : 0;
+            if (completedLeads > 0) {
+                console.log('Lead completed — unlocking episode automatically.');
+                stopLeadCheck();
+                openFinalPlayer();
+            }
+        }).catch(function(err) {
+            console.warn('AdBlueMedia lead check error:', err);
+        });
+    }
+
+    function startLeadCheck() {
+        stopLeadCheck();
+        leadCheckInterval = setInterval(checkLeads, 15000);
+    }
+    function stopLeadCheck() {
+        if (leadCheckInterval) { clearInterval(leadCheckInterval); leadCheckInterval = null; }
+    }
 
     window.showVerificationModal = function() {
         const thumbEl = document.getElementById('verifyThumb');
@@ -180,17 +244,7 @@
         closeQualityMenu();
         startPlayback();
     }
-    window.openFinalPlayer = function() {
-        closeVerificationModal();
-        const wrapper = document.querySelector('.video-wrapper');
-        wrapper.onclick = null;
-        const box = document.querySelector('.video-container');
-        box.innerHTML = '<video src="' + TEST_VIDEO + '" controls autoplay playsinline style="width:100%;height:100%;"></video>';
-        const icon = document.querySelector('.play-icon');
-        const controls = document.querySelector('.player-controls');
-        if (icon) icon.style.display = 'none';
-        if (controls) controls.style.display = 'none';
-    }
+    window.openFinalPlayer = function() { closeVerificationModal(); }
     window.startPlayback = function() { showVerificationModal(); }
 
     window.addEventListener('popstate', function() {
@@ -253,6 +307,7 @@
         const seeMoreContainer = document.getElementById('watchSeeMoreContainer');
         seeMoreContainer.innerHTML = '';
         const candidates = games.filter(function(g, i){ return i !== gameIndex; });
+        // Fisher-Yates shuffle (unbiased, unlike sort(()=>Math.random()-0.5))
         for (let i = candidates.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             const tmp = candidates[i]; candidates[i] = candidates[j]; candidates[j] = tmp;
